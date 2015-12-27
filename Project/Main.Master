@@ -4,9 +4,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Tweakers</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'/>
+    <link rel="shortcut icon" type="image/x-icon" href="http://tweakers.net/favicon.ico"/>
     <link rel="stylesheet" href="css/StyleSheet.css" />
 </head>
 <body>
@@ -29,6 +30,8 @@
             </div>
         </div>
         <div id="menubottombar">
+        </div>
+        <div id="greybar">
         </div>
     </div>
     <form id="form_Content" runat="server">
