@@ -7,18 +7,49 @@
     <title>Tweakers</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="css/StyleSheet.css" />
 </head>
 <body>
     <div id="top">
-
+        <div id="menupadder">
+            <div id="menubar">
+                <div id="menu">
+                    <div id="logo">
+                        <a href="Default.aspx"></a>
+                    </div>
+                    <h1 class="logotext">Tweakers</h1>
+                    <ul id="navbar">
+                        <li><a href="http://tweakers.net/nieuws/">Nieuws</a></li>
+                        <li><a href="http://tweakers.net/reviews/">Reviews</a></li>
+                        <li><a href="http://tweakers.net/pricewatch/">Pricewatch</a></li>
+                        <li><a href="http://tweakers.net/reviews/" class="bigpad">Inloggen</a></li>
+                        <li><a href="http://tweakers.net/pricewatch/">Registeren</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="menubottombar">
+        </div>
     </div>
     <form id="form_Content" runat="server">
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
-        
-        </asp:ContentPlaceHolder>
-    </div>
-        <div id="footer"
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
     </form>
+
+    <div id="bottom">
+        <div id="about">
+            <ul class="seperatedList">
+                <li><a href="#">Adverteren</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Weergaveopties</a></li>
+                <li><a href="#">Over Tweakers</a></li>
+                <li><a href="#">Jouw privacy</a></li>
+                <li><a href="#">Algemene voorwaarden</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
