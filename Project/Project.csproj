@@ -33,7 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -69,8 +69,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\StyleSheet.css" />
-    <Content Include="Default.aspx" />
+    <Content Include="default.aspx" />
+    <Content Include="img\Vergelijker.PNG" />
     <Content Include="js\Script.js" />
+    <Content Include="nieuws.aspx" />
     <Content Include="packages.config" />
     <Content Include="Main.Master" />
     <None Include="Web.Debug.config">
@@ -81,15 +83,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Main.Master.cs">
       <DependentUpon>Main.Master</DependentUpon>
@@ -97,6 +101,13 @@
     </Compile>
     <Compile Include="Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="nieuws.aspx.cs">
+      <DependentUpon>nieuws.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="nieuws.aspx.designer.cs">
+      <DependentUpon>nieuws.aspx</DependentUpon>
     </Compile>
     <Compile Include="objects\Comment.cs" />
     <Compile Include="logic\CommentType.cs" />

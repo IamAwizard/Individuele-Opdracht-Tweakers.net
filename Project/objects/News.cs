@@ -19,7 +19,6 @@ namespace Project
             this.Title = title;
             this.Date = date;
             this.Content = content;
-            this.Categories = new List<string>();
         }
 
         public News(int id, string title, DateTime date)
@@ -28,15 +27,15 @@ namespace Project
             this.Title = title;
             this.Date = date;
             this.Content = "Nieuws met ID " + this.ID + ": heeft geen content";
-            this.Categories = new List<string>();
         }
 
         // Properties
         public int ID { get; private set; }
+        public int CommentCount { get; set; }
         public string Title { get; set; }
         public DateTime Date { get; set; }
         public string Content { get; set; }
-        public List<string> Categories { get; set; }
+        public string Category { get; set; }
         // Methods
     }
 }

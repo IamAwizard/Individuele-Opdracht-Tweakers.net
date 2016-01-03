@@ -16,11 +16,11 @@
             <div id="menubar">
                 <div id="menu">
                     <div id="logo">
-                        <a href="Default.aspx"></a>
+                        <a href="default.aspx"></a>
                     </div>
                     <h1 class="logotext">Tweakers</h1>
                     <ul id="navbar">
-                        <li><a href="http://tweakers.net/nieuws/">Nieuws</a></li>
+                        <li><a href="nieuws.aspx?news=0">Nieuws</a></li>
                         <li><a href="http://tweakers.net/reviews/">Reviews</a></li>
                         <li><a href="http://tweakers.net/pricewatch/">Pricewatch</a></li>
                         <li><a href="http://tweakers.net/reviews/" class="bigpad">Inloggen</a></li>

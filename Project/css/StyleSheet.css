@@ -346,3 +346,62 @@ a {
     background: #EBECEC repeat scroll 0% 0%;
     border-radius: 6px 6px 0px 0px;
 }
+
+table.newstable {
+    border-top: 1px solid #E8EAEA;
+    margin-bottom: 14px;
+    width: 100%;
+    table-layout: fixed;
+}
+
+    table.newstable td {
+        line-height: 15px;
+        border-bottom: 1px solid #E8EAEA;
+        padding: 7px 0px;
+        font-size: 13px;
+    }
+
+    table.newstable .category {
+        padding-top: 6px;
+        width: 25px;
+        text-align: center;
+    }
+
+    table.newstable .timeplaced {
+        width: 36px;
+        text-align: center;
+        color: #828585;
+    }
+
+    table.newstable .headline {
+        padding-left: 6px;
+    }
+
+    table.newstable .comments {
+        color: #828585;
+        width: 42px;
+        text-align: right;
+    }
+
+.commentcounter {
+    width: 37px;
+    height: 19px;
+    background: transparent url("http://tweakimg.net/g/icons/reacties.png") no-repeat scroll 0% 0%;
+    color: #FFF !important;
+    display: inline-block;
+    font-size: 11px;
+    line-height: 16px;
+    text-align: center;
+    text-decoration: none !important;
+}
+
+.categoryicon {
+    width: 13px;
+    height: 11px;
+    background: transparent url("http://tweakimg.net/g/bullets/fp-channelicons-v2.png") no-repeat scroll 0% 0%;
+    background-position: 0px -12px;
+    vertical-align: middle;
+    margin-top: -1px;
+    margin-left: 5px;
+    display: block;
+}
