@@ -20,7 +20,7 @@
                     </div>
                     <h1 class="logotext">Tweakers</h1>
                     <ul id="navbar">
-                        <li><a href="nieuws.aspx?news=0">Nieuws</a></li>
+                        <li><a href="nieuws.aspx">Nieuws</a></li>
                         <li><a href="http://tweakers.net/reviews/">Reviews</a></li>
                         <li><a href="http://tweakers.net/pricewatch/">Pricewatch</a></li>
                         <li><a href="http://tweakers.net/reviews/" class="bigpad">Inloggen</a></li>
@@ -54,5 +54,8 @@
             </ul>
         </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/Script.js"></script> 
 </body>
 </html>

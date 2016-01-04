@@ -322,7 +322,7 @@ a {
 
 
 #about {
-    height: 149px;
+    height: 350px;
     padding-top: 22px;
     position: relative;
     text-align: center;
@@ -383,6 +383,10 @@ table.newstable {
         text-align: right;
     }
 
+table a:hover {
+    text-decoration: underline;
+}
+
 .commentcounter {
     width: 37px;
     height: 19px;
@@ -405,3 +409,48 @@ table.newstable {
     margin-left: 5px;
     display: block;
 }
+
+h1, h2, h3, p {
+    margin: 0px 0px 15px;
+}
+
+h1 {
+    line-height: 33px;
+    font-size: 27px;
+    font-family: "Roboto Condensed",arial,helvetica,"Liberation Sans",sans-serif;
+    font-weight: 400;
+}
+
+.titleLink h1 {
+    color: #B9133C;
+    margin-top: 20px;
+}
+
+    .titleLink h1:hover {
+        text-decoration: underline;
+    }
+
+.article {
+    width: 620px;
+}
+
+    .article p {
+        margin: 0px 0px 15px;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+.newsarea {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E8EAEA;
+}
+
+h1.notfound{
+    color: #B9133C;
+}
+
+iframe {
+    overflow:hidden;
+}
+

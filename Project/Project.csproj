@@ -109,6 +109,7 @@
     <Compile Include="nieuws.aspx.designer.cs">
       <DependentUpon>nieuws.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NotFound404.cs" />
     <Compile Include="objects\Comment.cs" />
     <Compile Include="logic\CommentType.cs" />
     <Compile Include="database\DatabaseManager.cs" />
