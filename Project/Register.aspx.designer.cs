@@ -10,69 +10,69 @@
 namespace Project {
     
     
-    public partial class Main {
+    public partial class Register {
         
         /// <summary>
-        /// head control.
+        /// lbl_Username control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.Label lbl_Username;
         
         /// <summary>
-        /// hlink_menubar_UserCurrent control.
+        /// tbox_Username control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlink_menubar_UserCurrent;
+        protected global::System.Web.UI.WebControls.TextBox tbox_Username;
         
         /// <summary>
-        /// hlink_menubar_UserLogout control.
+        /// lbl_Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlink_menubar_UserLogout;
+        protected global::System.Web.UI.WebControls.Label lbl_Email;
         
         /// <summary>
-        /// hlink_menubar_Login control.
+        /// tbox_email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlink_menubar_Login;
+        protected global::System.Web.UI.WebControls.TextBox tbox_email;
         
         /// <summary>
-        /// hlink_menubar_Register control.
+        /// lbl_Password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink hlink_menubar_Register;
+        protected global::System.Web.UI.WebControls.Label lbl_Password;
         
         /// <summary>
-        /// form_Content control.
+        /// tbox_Password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form_Content;
+        protected global::System.Web.UI.WebControls.TextBox tbox_Password;
         
         /// <summary>
-        /// ContentPlaceHolder control.
+        /// btn_Login control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder;
+        protected global::System.Web.UI.WebControls.Button btn_Login;
     }
 }

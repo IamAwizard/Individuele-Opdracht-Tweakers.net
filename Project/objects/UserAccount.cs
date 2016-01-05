@@ -12,15 +12,24 @@ namespace Project
         // Fields
 
         // Constructor
-        public UserAccount(int id, string accountname, string password, string email, string givenname, string photo, DateTime dateofbirth)
+        public UserAccount(int id, string accountname, string email, string givenname, string photo, DateTime dateofbirth)
         {
             this.ID = id;
             this.AccountName = accountname;
-            this.Password = password;
             this.Email = email;
             this.GivenName = givenname;
             this.Photo = photo;
             this.DateOfBirth = dateofbirth;
+        }
+
+        public UserAccount(int id, string accountname, string email)
+        {
+            this.ID = id;
+            this.AccountName = accountname;
+            this.Email = email;
+            this.GivenName = "Niet Opgegeven";
+            this.Photo = "C:/";
+            this.DateOfBirth = DateTime.MinValue;
         }
 
         // Properties

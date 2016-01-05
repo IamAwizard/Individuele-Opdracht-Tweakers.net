@@ -262,6 +262,10 @@ a {
         padding-left: 1px;
     }
 
+        #navbar li.floatright {
+            float: right;
+        }
+
         #navbar li a {
             display: block;
             height: 44px;
@@ -273,6 +277,8 @@ a {
             text-decoration: none;
             cursor: pointer;
         }
+
+
 
             #navbar li a:hover {
                 background: #852c3e;
@@ -317,12 +323,13 @@ a {
 #bottom {
     width: 100%;
     bottom: 0px;
+    position: relative;
     background: #313232 none repeat scroll 0% 0%;
 }
 
 
 #about {
-    height: 350px;
+    height: 200px;
     padding-top: 22px;
     position: relative;
     text-align: center;
@@ -419,6 +426,7 @@ h1 {
     font-size: 27px;
     font-family: "Roboto Condensed",arial,helvetica,"Liberation Sans",sans-serif;
     font-weight: 400;
+    color: #B9133C;
 }
 
 .titleLink h1 {
@@ -446,11 +454,65 @@ h1 {
     border-bottom: 1px solid #E8EAEA;
 }
 
-h1.notfound{
+h1.notfound {
     color: #B9133C;
 }
 
 iframe {
-    overflow:hidden;
+    overflow: hidden;
 }
 
+.loginarea {
+    margin: 15px 15px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+    .loginarea input {
+        padding: 4px 10px;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.05) inset;
+        border: 1px solid #C3C6C6;
+        border-radius: 1px;
+        font-size: 16px;
+        width: 300px;
+        font-family: arial,helvetica,"Liberation Sans",sans-serif;
+    }
+
+    .loginarea table {
+        margin: 20px 0px 20px 20px;
+        font-weight: 600;
+    }
+
+#submit {
+    margin: 20px 0px 0px 20px;
+    padding: 30px 0px 0px 200px;
+    border-top: 1px solid #E8EAEA;
+}
+
+    #submit a:hover {
+        color: #B9133C;
+        text-decoration: underline;
+    }
+
+    #submit input {
+        margin-top: 20px;
+        padding: 4px 10px;
+        background-color: #0a92c8;
+        color: white;
+        border: none;
+        width: 150px;
+    }
+
+        #submit input:hover {
+            background-color: #22a2d4;
+            cursor: pointer;
+        }
+
+.hidden{
+    display: none !important;
+}
+
+.errormessage{
+    color: #852c3e;
+    font-weight: 600;
+}

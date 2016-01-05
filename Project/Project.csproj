@@ -72,6 +72,8 @@
     <Content Include="default.aspx" />
     <Content Include="img\Vergelijker.PNG" />
     <Content Include="js\Script.js" />
+    <Content Include="login.aspx" />
+    <Content Include="logout.aspx" />
     <Content Include="nieuws.aspx" />
     <Content Include="packages.config" />
     <Content Include="Main.Master" />
@@ -83,6 +85,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Register.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -94,6 +97,21 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logic\UserCache.cs" />
+    <Compile Include="login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logout.aspx.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logout.aspx.designer.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Main.Master.cs">
       <DependentUpon>Main.Master</DependentUpon>
@@ -124,6 +142,13 @@
     <Compile Include="objects\Shop.cs" />
     <Compile Include="objects\UserAccount.cs" />
     <Compile Include="objects\UserReview.cs" />
+    <Compile Include="Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="nieuws\" />

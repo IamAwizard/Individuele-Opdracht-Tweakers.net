@@ -36,7 +36,7 @@ namespace Project
             this.con = new OracleConnection();
             this.con.ConnectionString = this.connectionstring;
             this.con.Open();
-            Console.WriteLine("CONNECTION SUCCESFULL");
+            System.Diagnostics.Debug.WriteLine("CONNECTION SUCCESFULL");
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Project
         /// <summary>
         /// Disconnect from the database...
         /// </summary>
-        private void Read(string sql)
+        private void SimpleRead(string sql)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Project
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Project
                 this.Connect();
                 List<News> returnlist = new List<News>();
 
-                this.Read("SELECT * FROM " +
+                this.SimpleRead("SELECT * FROM " +
                     "(SELECT N.NIEUWSID, N.DATUM, N.TITEL, C.NAAM, COUNT(R.REACTIEID) AS AANTALREACTIES " +
                     "FROM NIEUWS N LEFT JOIN  REACTIE R ON N.NIEUWSID = R.EXTERNID AND R.REACTIETYPEID = 1, CATEGORIE C " +
                     "WHERE N.CATEGORIE = C.CATEGORIEID " +
@@ -118,19 +118,14 @@ namespace Project
                 this.Connect();
                 List<News> returnlist = new List<News>();
 
-                this.cmd = new OracleCommand();
-                this.cmd.Connection = this.con;
-                this.cmd.CommandType = CommandType.Text;
-                this.cmd.CommandText = "SELECT * FROM " +
+                this.SimpleRead("SELECT * FROM " +
                                        "(SELECT N.NIEUWSID, N.DATUM, N.TITEL, C.NAAM, COUNT(R.REACTIEID) AS AANTALREACTIES " +
                                        "FROM NIEUWS N LEFT JOIN  REACTIE R ON N.NIEUWSID = R.EXTERNID AND R.REACTIETYPEID = 1, CATEGORIE C " +
                                        "WHERE N.CATEGORIE = C.CATEGORIEID " +
                                        "OR N.CATEGORIE IS NULL " +
                                        "GROUP BY N.NIEUWSID, N.DATUM, N.TITEL, C.NAAM " +
                                        "ORDER BY DATUM DESC) " +
-                                       "WHERE ROWNUM <= 30";
-
-                this.dr = this.cmd.ExecuteReader();
+                                       "WHERE ROWNUM <= 30");
 
                 while (this.dr.Read())
                 {
@@ -149,7 +144,7 @@ namespace Project
 
                 foreach (News n in returnlist)
                 {
-                    this.Read("SELECT CONTENT FROM NIEUWS WHERE NIEUWSID =" + n.ID);
+                    this.SimpleRead("SELECT CONTENT FROM NIEUWS WHERE NIEUWSID =" + n.ID);
                     while (this.dr.Read())
                     {
                         var content = this.dr.GetString(0);
@@ -167,8 +162,74 @@ namespace Project
             }
             finally
             {
+
+            }
+        }
+
+        public List<UserAccount> GetUserCache()
+        {
+            try
+            {
+                this.Connect();
+                List<UserAccount> returnlist = new List<UserAccount>();
+
+                this.SimpleRead("SELECT ACCOUNTID, ACCOUNTNAAM, LOWER(EMAIL), NAAM, FOTO, GEBOORTEDATUM FROM USERACCOUNT");
+                while (this.dr.Read())
+                {
+                    var id = this.dr.GetInt32(0);
+                    var username = this.dr.GetString(1);
+                    var email = this.dr.GetString(2);
+                    var givenname = this.dr.GetString(3);
+                    var photo = this.dr.GetString(4);
+                    var dob = this.dr.GetDateTime(5);
+
+                    UserAccount foo = new UserAccount(id, username, email, givenname, photo, dob);
+                    returnlist.Add(foo);
+                }
+                return returnlist;
+            }
+            catch (Exception ex) 
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
                 this.Disconnect();
             }
         }
+
+        public bool AuthenticateUser(string email, string password)
+        {
+            try
+            {
+                this.Connect();
+
+                this.cmd = new OracleCommand();
+                this.cmd.Connection = this.con;
+                this.cmd.CommandText = "SELECT * FROM USERACCOUNT WHERE LOWER(email) = LOWER(:newEMAIL) AND WACHTWOORD = :newPASSWORD";
+                this.cmd.Parameters.Add("newEMAIL", email);
+                this.cmd.Parameters.Add("newPASSWORD", password);
+                this.cmd.CommandType = CommandType.Text;
+                this.dr = this.cmd.ExecuteReader();
+                if(dr.HasRows)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                this.Disconnect();
+            }
+        }
+
     }
 }
