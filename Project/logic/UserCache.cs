@@ -1,4 +1,7 @@
-﻿namespace Project
+﻿// <Summary>Loads the users into a local list for quicker comparison</Summary>
+// <Author>Jeroen Roovers</Author>
+
+namespace Project
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +11,7 @@
     public static class UserCache
     {
         // Fields
-        static DatabaseManager dbm = new DatabaseManager();
+        private static DatabaseManager dbm = new DatabaseManager();
 
         // Properties
         /// <summary>

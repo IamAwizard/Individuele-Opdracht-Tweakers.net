@@ -5,9 +5,9 @@ namespace Project
 {
     public enum CommentType
     {
+        CommentOnNews = 1,
         CommentOnReview,
         CommentOnUserReview,
-        CommentOnNews,
         CommentOnComment
     }
 }

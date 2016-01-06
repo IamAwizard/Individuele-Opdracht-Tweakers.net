@@ -12,6 +12,13 @@ namespace Project
         // Fields
 
         // Constructor
+        public UserAccount(string accountname, string email, string password)
+        {
+            this.AccountName = accountname;
+            this.Email = email;
+            this.Password = password;
+        }
+
         public UserAccount(int id, string accountname, string email, string givenname, string photo, DateTime dateofbirth)
         {
             this.ID = id;

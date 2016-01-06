@@ -4,9 +4,20 @@
     min-height: 100%;
     min-width: 1000px;
     color: #000;
-    background-color: #FFF;
+    background-color: #DBDCDC;
     font-family: arial,helvetica,"Liberation Sans",sans-serif;
     font-size: 12px;
+}
+
+#form_Content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    background: #FFF none repeat scroll 0% 0%;
+    width: 980px;
+    margin: 0px auto;
+    border: 1px solid;
+    border-color: #BDBEBE;
 }
 
 a {
@@ -126,6 +137,7 @@ a {
             font-weight: 400;
             font-size: 18px;
             margin: 0px;
+            color: inherit;
         }
 
         .highlight a:hover {
@@ -223,7 +235,6 @@ a {
 
 #top {
     background-color: #313232;
-    border-bottom: 1px solid #C3C6C6;
 }
 
 #menubar {
@@ -325,6 +336,7 @@ a {
     bottom: 0px;
     position: relative;
     background: #313232 none repeat scroll 0% 0%;
+    margin-top: 20px;
 }
 
 
@@ -350,7 +362,7 @@ a {
 
 #greybar {
     height: 55px;
-    background: #EBECEC repeat scroll 0% 0%;
+    background: #DBDCDC repeat scroll 0% 0%;
     border-radius: 6px 6px 0px 0px;
 }
 
@@ -392,6 +404,7 @@ table.newstable {
 
 table a:hover {
     text-decoration: underline;
+    color: #B9133C;
 }
 
 .commentcounter {
@@ -421,12 +434,15 @@ h1, h2, h3, p {
     margin: 0px 0px 15px;
 }
 
+h1, h2, h3 {
+    color: #B9133C;
+}
+
 h1 {
     line-height: 33px;
     font-size: 27px;
     font-family: "Roboto Condensed",arial,helvetica,"Liberation Sans",sans-serif;
     font-weight: 400;
-    color: #B9133C;
 }
 
 .titleLink h1 {
@@ -451,8 +467,22 @@ h1 {
 .newsarea {
     margin-bottom: 20px;
     padding-bottom: 10px;
+    padding-left: 30px;
     border-bottom: 1px solid #E8EAEA;
 }
+
+    .newsarea a {
+        text-decoration: underline;
+    }
+
+        .newsarea a.titleLink {
+            text-decoration: none;
+        }
+
+        .newsarea a:hover {
+            color: #B9133C;
+            text-decoration: underline;
+        }
 
 h1.notfound {
     color: #B9133C;
@@ -508,11 +538,76 @@ iframe {
             cursor: pointer;
         }
 
-.hidden{
+.hidden {
     display: none !important;
 }
 
-.errormessage{
+.errormessage {
     color: #852c3e;
     font-weight: 600;
 }
+
+p.smalldate {
+    color: #616464;
+    font-size: 12px;
+}
+
+.smalldate a {
+    color: #616464;
+    text-decoration: none;
+}
+
+a.newscommentlink {
+    text-decoration: none;
+}
+
+h2 small {
+    font-size: 13px;
+}
+
+.comments {
+    margin-left: 20px;
+}
+
+.comment {
+    border: 1px solid #DDDEDE;
+    padding: 10px 15px 8px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.newcomment {
+    margin-left: 20px;
+}
+
+textarea {
+    border: 1px solid #C3C6C6;
+    border-radius: 1px;
+    font-size: 12px;
+    font-family: arial,helvetica,"Liberation Sans",sans-serif;
+    padding: 2px 3px;
+    min-height: 234px;
+    min-width: 234px;
+    border: 1px solid #DDDEDE;
+    margin-bottom: 5px;
+    line-height: 1.6;
+}
+
+.acceptbutton {
+    height: 26px;
+    padding: 0px 10px;
+    font-size: 12px;
+    color: #FFF;
+    text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.15);
+    border: 1px solid #0987B8;
+    border-radius: 1px;
+    cursor: pointer;
+    background: #0A93CA linear-gradient(#0A93CA, #0A8ABD) repeat scroll 0% 0%;
+    box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+    .acceptbutton:hover {
+        color: #FFF;
+        border-color: #0B94BF;
+        background: #0CA3D4 linear-gradient(#0CA3D4, #0B98C5) repeat scroll 0% 0%;
+    }

@@ -13,6 +13,14 @@ namespace Project
         // Fields
 
         // Constructor
+        public Comment(DateTime date, UserAccount author, CommentType type, string content)
+        {
+            this.Date = date;
+            this.Type = type;
+            this.Content = content;
+            this.Author = author;
+        }
+
         public Comment(int id, DateTime date, UserAccount author, CommentType type, string content)
         {
             this.ID = id;

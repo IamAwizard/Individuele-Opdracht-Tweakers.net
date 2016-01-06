@@ -14,7 +14,7 @@ namespace Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            UpdateMenuBar();
+            this.UpdateMenuBar();
         }
 
         /// <summary>
@@ -28,25 +28,25 @@ namespace Project
             if (this.Session["isLoggedIn"] == null)
             {
                 this.Session["isLoggedIn"] = falsestring;
-                hlink_menubar_UserCurrent.CssClass = "hidden";
-                hlink_menubar_UserLogout.CssClass = "hidden";
+                this.hlink_menubar_UserCurrent.CssClass = "hidden";
+                this.hlink_menubar_UserLogout.CssClass = "hidden";
             }
             else
             {
                 if ((string)Session["isLoggedIn"] == truestring)
                 {
-                    hlink_menubar_Login.CssClass = "hidden";
-                    hlink_menubar_Register.CssClass = "hidden";
-                    hlink_menubar_UserCurrent.CssClass = "";
-                    hlink_menubar_UserCurrent.Text = (string)Session["userAccountName"];
-                    hlink_menubar_UserLogout.CssClass = "";
+                    this.hlink_menubar_Login.CssClass = "hidden";
+                    this.hlink_menubar_Register.CssClass = "hidden";
+                    this.hlink_menubar_UserCurrent.CssClass = string.Empty;
+                    this.hlink_menubar_UserCurrent.Text = (string)Session["userAccountName"];
+                    this.hlink_menubar_UserLogout.CssClass = string.Empty;
                 }
                 else
                 {
-                    hlink_menubar_Login.CssClass = "";
-                    hlink_menubar_Register.CssClass = "";
-                    hlink_menubar_UserCurrent.CssClass = "hidden";
-                    hlink_menubar_UserLogout.CssClass = "hidden";
+                    this.hlink_menubar_Login.CssClass = string.Empty;
+                    this.hlink_menubar_Register.CssClass = string.Empty;
+                    this.hlink_menubar_UserCurrent.CssClass = "hidden";
+                    this.hlink_menubar_UserLogout.CssClass = "hidden";
                 }
             }
         }

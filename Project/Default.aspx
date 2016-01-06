@@ -46,9 +46,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 column">
+        <div class="col-9 column">
             <asp:Table runat="server" ID="table_News" CssClass="newstable">
             </asp:Table>
          </div>
+        <div class="col-3 column">
+
+        </div>
     </div>
 </asp:content>

@@ -28,7 +28,7 @@ namespace Project
                     TableCell category = new TableCell();
                     HyperLink categorylink = new HyperLink();
                     categorylink.Text = string.Empty;
-                    categorylink.ToolTip = n.Category;
+                    categorylink.ToolTip = "TODO";
                     categorylink.NavigateUrl = "#";
                     categorylink.CssClass = "categoryicon";
                     category.Controls.Add(categorylink);
@@ -41,7 +41,7 @@ namespace Project
                     TableCell headline = new TableCell();
                     HyperLink headlinelink = new HyperLink();
                     headlinelink.Text = n.Title;
-                    headlinelink.NavigateUrl = "#";
+                    headlinelink.NavigateUrl = "nieuws.aspx?news=" + n.ID;
                     headline.Controls.Add(headlinelink);
                     headline.CssClass = "headline";
 
@@ -50,7 +50,7 @@ namespace Project
                     HyperLink commentlink = new HyperLink();
                     commentlink.Text = n.CommentCount.ToString();
                     commentlink.CssClass = "commentcounter";
-                    commentlink.NavigateUrl = "#";
+                    commentlink.NavigateUrl = "nieuws.aspx?news=" + n.ID + "#reacties";
                     commentcount.Controls.Add(commentlink);
                     
                     tr.Cells.Add(category);

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
+﻿// <Summary>Logout page to abandon session</Summary>
+// <Author>Jeroen Roovers</Author>
 namespace Project
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+    using System.Web.UI;
+    using System.Web.UI.WebControls;
+
     public partial class Logout : System.Web.UI.Page
     {
 
@@ -15,7 +17,6 @@ namespace Project
             if ((string)Session["isLoggedIn"] == "true")
             {
                 Session.Abandon();
-                
             }
             else
             {
