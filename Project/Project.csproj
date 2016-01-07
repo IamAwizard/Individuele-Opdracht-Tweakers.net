@@ -85,7 +85,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Register.aspx" />
+    <Content Include="register.aspx" />
+    <Content Include="reviews.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -142,12 +143,19 @@
     <Compile Include="objects\Shop.cs" />
     <Compile Include="objects\UserAccount.cs" />
     <Compile Include="objects\UserReview.cs" />
-    <Compile Include="Register.aspx.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
+    <Compile Include="register.aspx.cs">
+      <DependentUpon>register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Register.aspx.designer.cs">
-      <DependentUpon>Register.aspx</DependentUpon>
+    <Compile Include="register.aspx.designer.cs">
+      <DependentUpon>register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="reviews.aspx.cs">
+      <DependentUpon>reviews.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="reviews.aspx.designer.cs">
+      <DependentUpon>reviews.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

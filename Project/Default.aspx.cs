@@ -17,6 +17,12 @@ namespace Project
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            this.LoadReviews();
+            this.LoadNews();
+        }
+
+        private void LoadNews()
+        {
             List<News> newslist = this.dbm.GetLatestNews();
 
             if (newslist != null)
@@ -52,13 +58,73 @@ namespace Project
                     commentlink.CssClass = "commentcounter";
                     commentlink.NavigateUrl = "nieuws.aspx?news=" + n.ID + "#reacties";
                     commentcount.Controls.Add(commentlink);
-                    
+
                     tr.Cells.Add(category);
                     tr.Cells.Add(time);
                     tr.Cells.Add(headline);
                     tr.Cells.Add(commentcount);
 
                     this.table_News.Rows.Add(tr);
+                }
+            }
+        }
+
+        private void LoadReviews()
+        {
+            List<Review> reviews = this.dbm.GetLatestReviews();
+
+            if (reviews != null)
+            {
+                if (reviews.Count > 0)
+                {
+                    string navigateurl = string.Format("reviews.aspx?review={0}&page={1}", reviews[0].ID, reviews[0].Pages[0].PageNR);
+                    this.link_Highlight1.Text = string.Format("<h2>{0}</h2><p>{1}</p>", reviews[0].Title, reviews[0].SubTitle);
+                    this.link_Highlight1.NavigateUrl = navigateurl;
+                    if (reviews[0].HighLight != null)
+                    {
+                        this.img_Highlight1.ImageUrl = reviews[0].HighLight;
+                    }
+                    else
+                    {
+                        this.img_Highlight1.ImageUrl = "http://placehold.it/300x150";
+                    }
+
+                    this.link_Highlight1Comments.Text = reviews[0].CommentCount.ToString() + " reacties";
+                    this.link_Highlight1Comments.NavigateUrl = navigateurl + "#reacties";
+                }
+                if (reviews.Count > 1)
+                {
+                    string navigateurl = string.Format("reviews.aspx?review={0}&page={1}", reviews[1].ID, reviews[1].Pages[0].PageNR);
+                    this.link_Highlight2.Text = string.Format("<h2>{0}</h2><p>{1}</p>", reviews[1].Title, reviews[1].SubTitle);
+                    this.link_Highlight2.NavigateUrl = navigateurl;
+                    if (reviews[1].HighLight != null)
+                    {
+                        this.img_Highlight2.ImageUrl = reviews[1].HighLight;
+                    }
+                    else
+                    {
+                        this.img_Highlight2.ImageUrl = "http://placehold.it/300x150";
+                    }
+
+                    this.link_Highlight2Comments.Text = reviews[1].CommentCount.ToString() + " reacties";
+                    this.link_Highlight2Comments.NavigateUrl = navigateurl + "#reacties";
+                }
+                if (reviews.Count > 2)
+                {
+                    string navigateurl = string.Format("reviews.aspx?review={0}&page={1}", reviews[2].ID, reviews[2].Pages[0].PageNR);
+                    this.link_Highlight3.Text = string.Format("<h2>{0}</h2><p>{1}</p>", reviews[2].Title, reviews[2].SubTitle);
+                    this.link_Highlight3.NavigateUrl = navigateurl;
+                    if (reviews[2].HighLight != null)
+                    {
+                        this.img_Highlight3.ImageUrl = reviews[2].HighLight;
+                    }
+                    else
+                    {
+                        this.img_Highlight3.ImageUrl = "http://placehold.it/300x150";
+                    }
+
+                    this.link_Highlight3Comments.Text = reviews[2].CommentCount.ToString() + " reacties";
+                    this.link_Highlight3Comments.NavigateUrl = navigateurl + "#reacties";
                 }
             }
         }

@@ -78,7 +78,7 @@ namespace Project
             }
         }
 
-        private DateTime SafeReadDateTime (OracleDataReader odr, int colIndex)
+        private DateTime SafeReadDateTime(OracleDataReader odr, int colIndex)
         {
             {
                 if (!odr.IsDBNull(colIndex))
@@ -160,6 +160,57 @@ namespace Project
             }
         }
 
+        public Review GetReviewByID(int id)
+        {
+            try
+            {
+                this.Connect();
+                Review foo = null;
+
+                this.SimpleReadWithParaMeters("SELECT * FROM REVIEW WHERE REVIEWID = :someREVIEWID");
+                this.cmd.Parameters.Add("someREVIEWID", id);
+                this.dr = this.cmd.ExecuteReader();
+                while (this.dr.Read())
+                {
+                    var reviewid = this.SafeReadInt(this.dr, 0);
+                    var title = this.SafeReadString(this.dr, 1);
+                    var subtitle = this.SafeReadString(this.dr, 2);
+                    var summary = this.SafeReadString(this.dr, 3);
+                    var date = this.SafeReadDateTime(this.dr, 4);
+                    var thumbnail = this.SafeReadString(this.dr, 5);
+                    var highlightphoto = this.SafeReadString(this.dr, 5);
+
+                    foo = new Review(id, title, summary, date);
+                    foo.SubTitle = subtitle;
+                    foo.ThumbNail = thumbnail;
+                    foo.HighLight = highlightphoto;
+                }
+
+                this.SimpleRead("SELECT * FROM REVIEWPAGINA WHERE REVIEWID = " + id + " ORDER BY PAGINANR");
+                while (this.dr.Read())
+                {
+                    var pageid = this.SafeReadInt(this.dr, 0);
+                    var pagenr = this.SafeReadInt(this.dr, 1);
+                    var pagesubtitle = this.SafeReadString(this.dr, 2);
+                    var pagecontent = this.SafeReadString(this.dr, 3);
+
+                    ReviewPage toadd = new ReviewPage(pageid, pagenr, pagesubtitle, pagecontent);
+                    foo.Pages.Add(toadd);
+                }
+
+                return foo;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                this.Disconnect();
+            }
+        }
+
         public List<Comment> GetCommentsOnNewsByNewsID(int newsid)
         {
             try
@@ -169,6 +220,42 @@ namespace Project
 
                 this.SimpleReadWithParaMeters("SELECT R.REACTIEID, U.USERACCOUNTID, U.ACCOUNTNAAM, U.EMAIL, R.DATUM, CONTENT FROM REACTIE R, USERACCOUNT U WHERE EXTERNID = :someNIEUWSID AND REACTIETYPEID = 1 AND R.AUTEUR = U.USERACCOUNTID");
                 this.cmd.Parameters.Add("someNIEUWSID", newsid);
+                this.dr = this.cmd.ExecuteReader();
+                while (this.dr.Read())
+                {
+                    var commentid = this.SafeReadInt(this.dr, 0);
+                    var authorid = this.SafeReadInt(this.dr, 1);
+                    var authorname = this.SafeReadString(this.dr, 2);
+                    var authoremail = this.SafeReadString(this.dr, 3);
+                    var commentdate = this.SafeReadDateTime(this.dr, 4);
+                    var commentcontent = this.SafeReadString(this.dr, 5);
+
+                    UserAccount author = new UserAccount(authorid, authorname, authoremail);
+                    Comment toadd = new Comment(commentid, commentdate, author, CommentType.CommentOnNews, commentcontent);
+                    foo.Add(toadd);
+                }
+                return foo;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                this.Disconnect();
+            }
+        }
+
+        public List<Comment> GetCommentsOnReviewByReviewID(int reviewid)
+        {
+            try
+            {
+                this.Connect();
+                List<Comment> foo = new List<Comment>();
+
+                this.SimpleReadWithParaMeters("SELECT R.REACTIEID, U.USERACCOUNTID, U.ACCOUNTNAAM, U.EMAIL, R.DATUM, CONTENT FROM REACTIE R, USERACCOUNT U WHERE EXTERNID = :someREVIEWID AND REACTIETYPEID = 2 AND R.AUTEUR = U.USERACCOUNTID");
+                this.cmd.Parameters.Add("someREVIEWID", reviewid);
                 this.dr = this.cmd.ExecuteReader();
                 while (this.dr.Read())
                 {
@@ -274,6 +361,64 @@ namespace Project
                     }
                 }
 
+                return returnlist;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                this.Disconnect();
+            }
+        }
+
+        public List<Review> GetLatestReviews()
+        {
+            try
+            {
+                this.Connect();
+                List<Review> returnlist = new List<Review>();
+
+                this.SimpleRead("SELECT * FROM (" +
+                                       "SELECT RV.REVIEWID, RV.TITEL, RV.SAMENVATTING, RV.DATUM, COUNT(R. REACTIEID), RV.THUMBFOTO, RV.HIGHLIGHTFOTO, RV.SUBTITEL " +
+                                        "FROM REVIEW RV LEFT JOIN REACTIE R ON R.EXTERNID = RV.REVIEWID AND REACTIETYPEID = 2 " +
+                                        "GROUP BY RV.REVIEWID, RV.TITEL, RV.SAMENVATTING, RV.DATUM, RV.THUMBFOTO, RV.HIGHLIGHTFOTO, RV.SUBTITEL " +
+                                        "ORDER BY RV.DATUM DESC) " +
+                                        "WHERE ROWNUM < 11");
+                while (this.dr.Read())
+                {
+                    var id = this.SafeReadInt(this.dr, 0);
+                    var title = this.SafeReadString(this.dr, 1);
+                    var summary = this.SafeReadString(this.dr, 2);
+                    var date = this.SafeReadDateTime(this.dr, 3);
+                    var commentcount = this.SafeReadDecimal(this.dr, 4);
+                    var thumb = this.SafeReadString(this.dr, 5);
+                    var fpphoto = this.SafeReadString(this.dr, 6);
+                    var subtitle = this.SafeReadString(this.dr, 7);
+
+                    Review toadd = new Review(id, title, summary, date);
+                    toadd.CommentCount = (int)commentcount;
+                    toadd.ThumbNail = thumb;
+                    toadd.HighLight = fpphoto;
+                    toadd.SubTitle = subtitle;
+                    returnlist.Add(toadd);
+                }
+                foreach (Review r in returnlist)
+                {
+                    this.SimpleRead("SELECT * FROM REVIEWPAGINA WHERE REVIEWID = " + r.ID + " ORDER BY PAGINANR");
+                    while (this.dr.Read())
+                    {
+                        var pageid = this.SafeReadInt(this.dr, 0);
+                        var pagenr = this.SafeReadInt(this.dr, 1);
+                        var pagesubtitle = this.SafeReadString(this.dr, 2);
+                        var pagecontent = this.SafeReadString(this.dr, 3);
+
+                        ReviewPage toadd = new ReviewPage(pageid, pagenr, pagesubtitle, pagecontent);
+                        r.Pages.Add(toadd);
+                    }
+                }
                 return returnlist;
             }
             catch (Exception ex)

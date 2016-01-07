@@ -15,7 +15,7 @@
         {
             if(Request.QueryString["email"] != null)
             {
-                tbox_Username.Text = Request.QueryString["email"];
+                this.tbox_Username.Text = Request.QueryString["email"];
             }
         }
 
@@ -75,7 +75,7 @@
         private void LoadUser()
         {
             UserCache.UpdateCache();
-            UserAccount foo = UserCache.Users.Find(x => x.Email.ToLower() == tbox_Username.Text.ToLower());
+            UserAccount foo = UserCache.Users.Find(x => x.Email.ToLower() == this.tbox_Username.Text.ToLower());
             this.Session["isLoggedIn"] = "true";
             this.Session["userID"] = foo.ID;
             this.Session["userEmail"] = foo.Email;

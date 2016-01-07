@@ -21,12 +21,16 @@
                     <h1 class="logotext">Tweakers</h1>
                     <ul id="navbar">
                         <li><a href="nieuws.aspx">Nieuws</a></li>
-                        <li><a href="http://tweakers.net/reviews/">Reviews</a></li>
+                        <li><a href="reviews.aspx">Reviews</a></li>
                         <li><a href="http://tweakers.net/pricewatch/">Pricewatch</a></li>
-                        <li class="floatright"><asp:HyperLink ID="hlink_menubar_UserCurrent" NavigateUrl="#" runat="server">blabla@somemail.com</asp:HyperLink></li>
-                        <li class="floatright"><asp:HyperLink ID="hlink_menubar_UserLogout" NavigateUrl="logout.aspx" runat="server">Uitloggen</asp:HyperLink></li>
-                        <li class="floatright"><asp:HyperLink ID="hlink_menubar_Login" NavigateUrl="login.aspx" runat="server">Inloggen</asp:HyperLink></li>
-                        <li class="floatright"><asp:HyperLink ID="hlink_menubar_Register" NavigateUrl="register.aspx" runat="server">Registreren</asp:HyperLink></li>
+                        <li class="floatright">
+                            <asp:HyperLink ID="hlink_menubar_UserCurrent" NavigateUrl="#" runat="server">blabla@somemail.com</asp:HyperLink></li>
+                        <li class="floatright">
+                            <asp:HyperLink ID="hlink_menubar_UserLogout" NavigateUrl="logout.aspx" runat="server">Uitloggen</asp:HyperLink></li>
+                        <li class="floatright">
+                            <asp:HyperLink ID="hlink_menubar_Login" NavigateUrl="login.aspx" runat="server">Inloggen</asp:HyperLink></li>
+                        <li class="floatright">
+                            <asp:HyperLink ID="hlink_menubar_Register" NavigateUrl="register.aspx" runat="server">Registreren</asp:HyperLink></li>
                     </ul>
                 </div>
             </div>
@@ -45,15 +49,10 @@
 
     <div id="bottom">
         <div id="about">
-            <ul class="seperatedList">
-                <li><a href="#">Adverteren</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Weergaveopties</a></li>
-                <li><a href="#">Over Tweakers</a></li>
-                <li><a href="#">Jouw privacy</a></li>
-                <li><a href="#">Algemene voorwaarden</a></li>
-                <li><a href="#">Cookies</a></li>
-            </ul>
+            <p>Gemaakt door Jeroen Roovers voor Individuele opdracht SE2 VJ 2016</p>
+
+            <p>media-content is afkomstig van <a href="http://www.tweakers.net">Tweakers.net</a><br />
+            © Alle rechten op onderdelen van deze site behoren tot hun respectievelijke eigenaar.</p>
         </div>
     </div>
 

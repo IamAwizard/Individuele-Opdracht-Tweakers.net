@@ -20,7 +20,7 @@ namespace Project
             }
             else
             {
-                LogoutHeader.InnerHtml = "Er is niemand om uit te loggen!";
+                this.LogoutHeader.InnerHtml = "Er is niemand om uit te loggen!";
             }
             Response.AddHeader("REFRESH", "5;URL=Default.aspx");
         }

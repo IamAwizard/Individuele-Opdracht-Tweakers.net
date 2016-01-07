@@ -22,6 +22,7 @@
         <div class="col-8 column">
             <div id="loginform" class="loginarea">
                 <h1>Inloggen</h1>
+                <p> Nog geen account?<br /><a href="register.aspx">Registreer nu</a> om reacties en gebruikersreviews te kunnen plaatsen!</p>
                 <table style="width: 100%;">
                     <tr>
                         <td class="auto-style1">
