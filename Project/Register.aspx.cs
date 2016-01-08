@@ -7,13 +7,20 @@ namespace Project
 
     public partial class Register : System.Web.UI.Page
     {
-
+        /// <summary>
+        /// Need refactoring
+        /// </summary>
         private DatabaseManager dbm = new DatabaseManager();
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        ///  Register Event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Btn_Register_Click(object sender, EventArgs e)
         {
             string newusername = this.tbox_Username.Text;
@@ -46,6 +53,13 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Checks the given input for correctness
+        /// </summary>
+        /// <param name="username">input username</param>
+        /// <param name="email">input email</param>
+        /// <param name="password">input password</param>
+        /// <returns></returns>
         private bool DoCheckInput(string username, string email, string password)
         {
             var foo = new EmailAddressAttribute();
@@ -82,16 +96,30 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Checks if the username is unique in the database
+        /// </summary>
+        /// <param name="username">input username</param>
+        /// <returns>True is available, otherwise false</returns>
         private bool CheckIfUniqueUsername(string username)
         {
             return this.dbm.CheckUsernameUnique(username);
         }
 
+        /// <summary>
+        /// Checks if the email is unique in the database
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>True if, unused otherwise false</returns>
         private bool CheckIfUNiqueEmail(string email)
         {
             return this.dbm.CheckEmailUnique(email);
         }
 
+        /// <summary>
+        /// It's happening. A account is being created.
+        /// </summary>
+        /// <param name="user">User to add</param>
         private void CreateAccount(UserAccount user)
         {
             this.dbm.AddUser(user);

@@ -9,8 +9,16 @@ namespace Project
 
     public partial class Pricewatch : System.Web.UI.Page
     {
+        /// <summary>
+        /// Databasemanager needs refactoring
+        /// </summary>
         private DatabaseManager dbm = new DatabaseManager();
 
+        /// <summary>
+        /// Page Load Event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             this.HideAllTheThings();
@@ -20,11 +28,18 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Hides the product specification div
+        /// </summary>
         private void HideAllTheThings()
         {
             this.ProductSection.Visible = false;
         }
 
+        /// <summary>
+        /// Checks if query string has valid values
+        /// </summary>
+        /// <returns></returns>
         private bool CheckQueryString()
         {
             if (Request.QueryString["product"] != null)
@@ -39,6 +54,9 @@ namespace Project
             return false;
         }
 
+        /// <summary>
+        /// Loads the details of a product into the product specification div
+        /// </summary>
         private void LoadProductDetails()
         {
             int productid = Convert.ToInt32(Session["productid"].ToString());
@@ -99,6 +117,11 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Event for Search click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Btn_Search_Click(object sender, EventArgs e)
         {
             this.HideAllTheThings();
@@ -153,18 +176,33 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Event for Read Reviews click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Btn_UserReviews_Click(object sender, EventArgs e)
         {
             this.Session["WhyDidYouCome"] = "read";
             this.Response.Redirect("productreview.aspx");
         }
 
+        /// <summary>
+        /// Event for Write Review click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Btn_WriteNewReview_Click(object sender, EventArgs e)
         {
             this.Session["WhyDidYouCome"] = "write";
             this.Response.Redirect("productreview.aspx");
         }
 
+        /// <summary>
+        /// Send comment. Moved to productreview.aspx
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Btn_SendComment_Click(object sender, EventArgs e)
         {
 

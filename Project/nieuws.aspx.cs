@@ -7,7 +7,13 @@ namespace Project
 
     public partial class Nieuws : System.Web.UI.Page
     {
+        #region Fields
+        /// <summary>
+        /// Databasemanager needs refactoring
+        /// </summary>
         private DatabaseManager dbm = new DatabaseManager();
+        #endregion
+
         #region Events
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -17,9 +23,55 @@ namespace Project
             else
                 this.LoadLatestNews();
         }
+
+        /// <summary>
+        ///  Adds a comment to the newsarticle.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Btn_SendComment_Click(object sender, EventArgs e)
+        {
+            if (this.CheckComment())
+            {
+                UserAccount author = (UserAccount)Session["currentUser"];
+                if (author != null)
+                {
+                    Comment foo = new Comment(DateTime.Now, author, CommentType.CommentOnNews, this.tbox_Comment.Text);
+                    int newsid = 0;
+                    bool isint = int.TryParse(Request.QueryString["news"], out newsid);
+                    if (isint)
+                    {
+                        this.dbm.AddComment(foo, newsid);
+                        Response.Redirect("nieuws.aspx?news=" + newsid);
+                    }
+                }
+            }
+        }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Checks if your comment is valid
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckComment()
+        {
+            if ((string)Session["isLoggedIn"] == "true")
+            {
+                if (this.tbox_Comment.Text.Length < 2)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// Gets the latest news and dynamically fills the page with HTML markup
+        /// </summary>
         private void LoadLatestNews()
         {
             List<News> newslist = this.dbm.GetLatestNewsWithContent();
@@ -33,7 +85,7 @@ namespace Project
         }
 
         /// <summary>
-        /// 
+        /// Loads a specific article. Gets triggered when there is a query string value of news
         /// </summary>
         /// <param name="givenid"></param>
         private void LoadArticle(string givenid)
@@ -97,38 +149,5 @@ namespace Project
 
         }
         #endregion
-        protected void Btn_SendComment_Click(object sender, EventArgs e)
-        {
-            if (this.CheckComment())
-            {
-                int authorid = 0;
-                bool authorok = int.TryParse(Session["userID"].ToString(), out authorid);
-                UserAccount author = new UserAccount(authorid, (string)Session["userAccountName"], (string)Session["userEmail"]);
-                Comment foo = new Comment(DateTime.Now, author, CommentType.CommentOnNews, this.tbox_Comment.Text);
-                int newsid = 0;
-                bool isint = int.TryParse(Request.QueryString["news"], out newsid);
-                if (isint)
-                {
-                    this.dbm.AddComment(foo, newsid);
-                    Response.Redirect("nieuws.aspx?news=" + newsid);
-                }
-            }
-        }
-
-        private bool CheckComment()
-        {
-            if ((string)Session["isLoggedIn"] == "true")
-            {
-                if (this.tbox_Comment.Text.Length < 2)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 }

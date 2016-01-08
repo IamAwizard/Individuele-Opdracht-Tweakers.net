@@ -7,10 +7,19 @@ namespace Project
 
     public partial class Productreview : System.Web.UI.Page
     {
+        /// <summary>
+        /// Lots of fields. Needs refactoring
+        /// </summary>
         private DatabaseManager dbm = new DatabaseManager();
         private Product product;
         private UserAccount user;
         private UserReview ur;
+
+        /// <summary>
+        /// Page Load Event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             this.HideAllTheThings();
@@ -24,6 +33,10 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Tries to load session data
+        /// </summary>
+        /// <returns></returns>
         private bool FetchFields()
         {
             if (this.Session["lastProduct"] != null)
@@ -38,6 +51,10 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Loads the Write or Load Review 
+        /// depending on what button the user click at pricewatch
+        /// </summary>
         private void DecideUserFaith()
         {
             if (this.Session["WhyDidYouCome"] != null)
@@ -65,6 +82,10 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Boots the user back to the mainscreen
+        /// </summary>
+        /// <param name="extramsg"> Additional information to be shown to the user</param>
         private void GetRidOfUser(string extramsg)
         {
             this.ReviewsSection.Visible = true;
@@ -72,6 +93,9 @@ namespace Project
             Response.AddHeader("REFRESH", "10;URL=Default.aspx");
         }
 
+        /// <summary>
+        /// Hide all the divs
+        /// </summary>
         private void HideAllTheThings()
         {
             this.AddCommentSection.Visible = false;
@@ -81,6 +105,10 @@ namespace Project
             this.ReviewsSection.Visible = false;
         }
 
+        /// <summary>
+        /// Loads a single review if there is a valid query string
+        /// Otherwise just show product details
+        /// </summary>
         private void LoadReview()
         {
             string qstring = string.Empty;
@@ -110,6 +138,10 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Loads a single review including content
+        /// </summary>
+        /// <param name="reviewid">id of review to be loaded</param>
         private void LoadSingleReview(int reviewid)
         {
             this.ur = this.dbm.GetUserReviewByID(reviewid);
@@ -161,6 +193,9 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Loads the interface for writing a review
+        /// </summary>
         private void WriteReview()
         {
             if (this.Session["currentUser"] != null)
@@ -171,6 +206,9 @@ namespace Project
             }
         }
 
+        /// <summary>
+        ///  Loads the production specification screen
+        /// </summary>
         private void LoadProductSection()
         {
             this.lbl_ProductMinPrice.Text = this.product.LowestPrice.ToString("C");
@@ -180,6 +218,11 @@ namespace Project
             this.ProductSection.Visible = true;
         }
 
+        /// <summary>
+        /// Send review event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Btn_SubmitReview_Click(object sender, EventArgs e)
         {
             if (this.CheckNessecaryFields())
@@ -211,6 +254,10 @@ namespace Project
 
         }
 
+        /// <summary>
+        /// Checks if text fields are not empty
+        /// </summary>
+        /// <returns></returns>
         private bool CheckNessecaryFields()
         {
             if (this.rbl_Rating.SelectedIndex == -1)
@@ -224,6 +271,10 @@ namespace Project
             return true;
         }
 
+        /// <summary>
+        ///  Display a error message below the submit review form
+        /// </summary>
+        /// <param name="msg">the message to display</param>
         private void DisplayErrorMessage(string msg)
         {
             this.ReviewsSection.InnerHtml = NotFound404.GetInnerHtmlFor404(msg);
@@ -232,6 +283,11 @@ namespace Project
             this.AddCommentSection.Visible = false;
         }
 
+        /// <summary>
+        /// Send comment event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Btn_SendComment_Click(object sender, EventArgs e)
         {
             if(this.tbox_Comment.Text.Length > 2)

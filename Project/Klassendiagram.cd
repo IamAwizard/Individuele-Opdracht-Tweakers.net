@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Project.DefaultManager">
+    <Position X="0.5" Y="8" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAQAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>logic\DefaultManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dbm" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Project.LoginManager">
+    <Position X="0.5" Y="10" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAQAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>logic\LoginManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="dbm" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Project.Comment">
+    <Position X="15.25" Y="4.5" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAgAAAgAAAAAAAAAAAAAABAQAAAAAAAAA=</HashCode>
+      <FileName>objects\Comment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Author" />
+      <Property Name="Type" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Project.News">
+    <Position X="11" Y="10.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAgEAAAAAAAAAQAAAAAAABAAAAAAAACAA=</HashCode>
+      <FileName>objects\News.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project.Price">
+    <Position X="17.5" Y="7.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>UAAAAAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>objects\Price.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="AssociatedShop" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Project.Product">
+    <Position X="11.5" Y="7.25" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAgAAACAQAAAAAEAAAAAAAgkAAAAA=</HashCode>
+      <FileName>objects\Product.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Pricing" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Project.Review">
+    <Position X="6.5" Y="4.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAgEAgAAAACEAQAAAAkAABAAAAAAAEAAA=</HashCode>
+      <FileName>objects\Review.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Pages" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Project.ReviewPage">
+    <Position X="6.5" Y="9.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAgAAAAAAAAAAAAQAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>objects\ReviewPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project.Shop">
+    <Position X="15.5" Y="10.5" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAQAAAAAEAAAAAAAggAAAAA=</HashCode>
+      <FileName>objects\Shop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project.UserAccount">
+    <Position X="14.25" Y="0.5" Width="6.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAiAAgCAAAAAAAAAAAAAQAAACAAQAAAAAAAA=</HashCode>
+      <FileName>objects\UserAccount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project.UserReview">
+    <Position X="6" Y="0.5" Width="7" />
+    <TypeIdentifier>
+      <HashCode>EACAAAAQAgAAhAAACAAAAAAQAAAAAAEBAAAAAAAAAAA=</HashCode>
+      <FileName>objects\UserReview.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Project.DatabaseManager">
+    <Position X="0.5" Y="0.5" Width="5" />
+    <Members>
+      <Field Name="cmd" Hidden="true" />
+      <Field Name="con" Hidden="true" />
+      <Field Name="connectionstring" Hidden="true" />
+      <Field Name="dr" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AKQgCEAIAAAQAISAAAMAAaACEgCIAQEgAIQAAAgACQA=</HashCode>
+      <FileName>database\DatabaseManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Project.CommentType">
+    <Position X="11" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAIAAAAAAAAAAAAAAAAAIAAAAAAAAAIA=</HashCode>
+      <FileName>logic\CommentType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -7,8 +7,16 @@ namespace Project
 
     public partial class Reviews : System.Web.UI.Page
     {
+        /// <summary>
+        /// Needs refactoring
+        /// </summary>
         private DatabaseManager dbm = new DatabaseManager();
 
+        /// <summary>
+        /// Page load event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             string qstring = Request.QueryString["review"];
@@ -21,6 +29,10 @@ namespace Project
         /// <summary>
         /// Loads reviews
         /// REALLY NEEDS REFACTORING
+        /// SERIOUSLY
+        /// DO NOT TOUCH
+        /// HERE BE DRAGONS
+        /// YOU HAVE BEEN WARNED
         /// </summary>
         /// <param name="reviewid"></param>
         private void LoadReview(string reviewid)
@@ -125,6 +137,9 @@ namespace Project
             }
         }
 
+        /// <summary>
+        ///  Loads a overview/list of reviews
+        /// </summary>
         private void LoadLatestReviews()
         {
             List<Review> reviewlist = this.dbm.GetLatestReviews();
@@ -148,33 +163,43 @@ namespace Project
             this.ReviewsArea.InnerHtml += "</tbody></table></div>";
         }
 
+        /// <summary>
+        /// Event for comment add
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Btn_SendComment_Click(object sender, EventArgs e)
         {
             if (this.CheckComment())
             {
-                int authorid = 0;
-                bool authorok = int.TryParse(Session["userID"].ToString(), out authorid);
-                UserAccount author = new UserAccount(authorid, (string)Session["userAccountName"], (string)Session["userEmail"]);
-                Comment foo = new Comment(DateTime.Now, author, CommentType.CommentOnReview, this.tbox_Comment.Text);
-                int pageid = 0;
-                bool pageisint = int.TryParse(Request.QueryString["page"], out pageid);
-                int reviewid = 0;
-                bool reviewisint = int.TryParse(Request.QueryString["review"], out reviewid);
-                if (reviewisint)
+                UserAccount author = (UserAccount)Session["currentUser"];
+                if (author != null)
                 {
-                    this.dbm.AddComment(foo, reviewid);
-                    if (pageisint)
+                    Comment foo = new Comment(DateTime.Now, author, CommentType.CommentOnReview, this.tbox_Comment.Text);
+                    int pageid = 0;
+                    bool pageisint = int.TryParse(Request.QueryString["page"], out pageid);
+                    int reviewid = 0;
+                    bool reviewisint = int.TryParse(Request.QueryString["review"], out reviewid);
+                    if (reviewisint)
                     {
-                        Response.Redirect("reviews.aspx?review=" + reviewid + "&page=" + pageid + "#reacties");
-                    }
-                    else
-                    {
-                        Response.Redirect("reviews.aspx?review=" + reviewid + "#reacties");
+                        this.dbm.AddComment(foo, reviewid);
+                        if (pageisint)
+                        {
+                            Response.Redirect("reviews.aspx?review=" + reviewid + "&page=" + pageid + "#reacties");
+                        }
+                        else
+                        {
+                            Response.Redirect("reviews.aspx?review=" + reviewid + "#reacties");
+                        }
                     }
                 }
             }
         }
 
+        /// <summary>
+        ///  Check comment input
+        /// </summary>
+        /// <returns></returns>
         private bool CheckComment()
         {
             if ((string)Session["isLoggedIn"] == "true")
@@ -191,6 +216,10 @@ namespace Project
             return false;
         }
 
+        /// <summary>
+        /// Displays error message, for example when false query strings have been entered
+        /// </summary>
+        /// <param name="msg"></param>
         private void DisplayErrorMessage(string msg)
         {
             this.ReviewsArea.InnerHtml = NotFound404.GetInnerHtmlFor404(msg);
