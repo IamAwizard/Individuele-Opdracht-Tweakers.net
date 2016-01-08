@@ -4,10 +4,6 @@ namespace Project
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.WebControls;
 
     public partial class Reviews : System.Web.UI.Page
     {
@@ -22,6 +18,11 @@ namespace Project
                 this.LoadLatestReviews();
         }
 
+        /// <summary>
+        /// Loads reviews
+        /// REALLY NEEDS REFACTORING
+        /// </summary>
+        /// <param name="reviewid"></param>
         private void LoadReview(string reviewid)
         {
             if ((string)Session["isLoggedIn"] != "true")

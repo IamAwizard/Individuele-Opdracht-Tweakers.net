@@ -53,7 +53,7 @@
                 <asp:Label ID="lbl_errormessage" CssClass="errormessage" runat="server" Text="*Je samenvatting en/of beoordeling is niet ingevuld terwijl deze verplicht zijn!" Visible="False"></asp:Label>
             </p>
             <br />
-            <asp:Button ID="btn_SubmitReview" CssClass="acceptbutton" runat="server" Text="Plaats Review" OnClick="btn_SubmitReview_Click" />
+            <asp:Button ID="btn_SubmitReview" CssClass="acceptbutton" runat="server" Text="Plaats Review" OnClick="Btn_SubmitReview_Click" />
         </div>
         <div id="ReviewsSection" class="productreviews col-12 column" runat="server">
             <div id="reviewtitle" class="userreviewtitle" runat="server">
@@ -126,7 +126,7 @@
             <p id="reageer"><b>Reageer:</b></p>
             <asp:TextBox ID="tbox_Comment" runat="server" TextMode="MultiLine" MaxLength="2048" Rows="12" Height="100%" Width="100%"></asp:TextBox>
             <br />
-            <asp:Button ID="btn_SendComment" CssClass="acceptbutton" runat="server" Text="Plaats Reactie" OnClick="btn_SendComment_Click" />
+            <asp:Button ID="btn_SendComment" CssClass="acceptbutton" runat="server" Text="Plaats Reactie" OnClick="Btn_SendComment_Click" />
 
         </div>
 

@@ -25,10 +25,10 @@
                     <br />
                     <asp:Image ID="img_Product" runat="server" ImageUrl="http://placehold.it/200x150" />
                     <br />
-                    <asp:Button ID="btn_UserReviews" class="acceptbutton" runat="server" Text="Gebruikersreviews" Width="70%" OnClick="btn_UserReviews_Click" />
+                    <asp:Button ID="btn_UserReviews" class="acceptbutton" runat="server" Text="Gebruikersreviews" Width="70%" OnClick="Btn_UserReviews_Click" />
                     <br />
                     <br />
-                    <asp:Button ID="btn_WriteNewReview" class="acceptbutton" runat="server" Text="Review Schrijven" Width="70%" OnClick="btn_WriteNewReview_Click" />
+                    <asp:Button ID="btn_WriteNewReview" class="acceptbutton" runat="server" Text="Review Schrijven" Width="70%" OnClick="Btn_WriteNewReview_Click" />
                 </div>
 
                 <div class=" col-9 column">

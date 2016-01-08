@@ -3,24 +3,11 @@
 
 namespace Project
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-
     public class ReviewPage
     {
         // Fields
 
         // Constructor
-        public ReviewPage(int id, int pagenr, string pagetitle)
-        {
-            this.ID = id;
-            this.PageNR = pagenr;
-            this.PageTitle = pagetitle;
-            this.Content = "Deze reviewpagina heeft geen content";
-        }
-
         public ReviewPage(int id, int pagenr, string pagetitle, string content)
         {
             this.ID = id;

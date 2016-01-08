@@ -1,10 +1,10 @@
-﻿namespace Project
+﻿// <Summary>Code behind for pricewatch tab</Summary>
+// <Author>Jeroen Roovers</Author>
+namespace Project
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
-    using System.Web.UI;
     using System.Web.UI.WebControls;
 
     public partial class Pricewatch : System.Web.UI.Page
@@ -153,13 +153,13 @@
             }
         }
 
-        protected void btn_UserReviews_Click(object sender, EventArgs e)
+        protected void Btn_UserReviews_Click(object sender, EventArgs e)
         {
             this.Session["WhyDidYouCome"] = "read";
             this.Response.Redirect("productreview.aspx");
         }
 
-        protected void btn_WriteNewReview_Click(object sender, EventArgs e)
+        protected void Btn_WriteNewReview_Click(object sender, EventArgs e)
         {
             this.Session["WhyDidYouCome"] = "write";
             this.Response.Redirect("productreview.aspx");

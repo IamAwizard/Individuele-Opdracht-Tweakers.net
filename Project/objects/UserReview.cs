@@ -4,9 +4,6 @@
 namespace Project
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
 
     public class UserReview
     {
@@ -56,7 +53,7 @@ namespace Project
         public int Rating { get; set; }
         public int CommentCount { get; set; }
         public string AuthorName { get; set; }
-        public string LongDateString { get { return Date.ToLongDateString(); } }
+        public string LongDateString { get { return this.Date.ToLongDateString(); } }
         // Methods
     }
 }

@@ -3,31 +3,31 @@
 namespace Project
 {
     using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.WebControls;
 
     public partial class Login : System.Web.UI.Page
     {
-        private DatabaseManager dbm = new DatabaseManager();
+        #region Fields
+        private LoginManager mng = new LoginManager();
+        #endregion
+
+        #region Load Event
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Request.QueryString["email"] != null)
-            {
-                this.tbox_Username.Text = Request.QueryString["email"];
-            }
+            this.SetURLWithEmail();
         }
+        #endregion;
 
+        #region Methods
         protected void Btn_Login_Click(object sender, EventArgs e)
         {
-            if(this.DoCheckInput(this.tbox_Username.Text, this.tbox_Password.Text))
+            if (this.DoCheckInput(this.tbox_Username.Text, this.tbox_Password.Text))
             {
-                if(this.dbm.AuthenticateUser(this.tbox_Username.Text, this.tbox_Password.Text))
+                UserAccount loginuser = null;
+                if (this.mng.AuthenticateUser(this.tbox_Username.Text, this.tbox_Password.Text, out loginuser))
                 {
-                    this.LoadUser();
+                    this.Session["isLoggedIn"] = "true";
+                    this.Session["currentUser"] = loginuser;
+                    this.Session.Timeout = 1440;
                     Response.Redirect("default.aspx");
                 }
                 else
@@ -39,48 +39,29 @@ namespace Project
 
         private bool DoCheckInput(string email, string password)
         {
-            var foo = new EmailAddressAttribute();
-
-            if(foo.IsValid(email))
+            string errormessage = string.Empty;
+            if (!this.mng.CheckIfInputValid(email, password, out errormessage))
             {
-                if(password.Length > 3)
-                {
-                    this.lbl_ErrorMessage.CssClass = "hidden";
-                    return true;
-                }
-                this.lbl_ErrorMessage.Text = "*Wachtwoord lengte moet minimaal 4 karakters zijn";
-                this.lbl_ErrorMessage.CssClass = "errormessage";
+                this.lbl_ErrorMessage.Text = errormessage;
+                this.lbl_ErrorMessage.Visible = true;
+                return false;
             }
-            else
-            {
-                if (password.Length > 3)
-                {
-                    this.lbl_ErrorMessage.Text = "*Ongeldig emailadres opgegeven";
-                    this.lbl_ErrorMessage.CssClass = "errormessage";
-                }
-                else
-                {
-                    this.lbl_ErrorMessage.Text = "*Ongeldig emailadres opgegeven en wachtwoord moet minimaal 4 tekens lang zijn";
-                    this.lbl_ErrorMessage.CssClass = "errormessage";
-                }
-
-            }
-            return false;
+            return true;
         }
 
         private void AuthenticationFailed()
         {
             this.lbl_ErrorMessage.Text = "*Combinatie van email en wachtwoord is onbekend!";
-            this.lbl_ErrorMessage.CssClass = "errormessage";
+            this.lbl_ErrorMessage.Visible = true;
         }
 
-        private void LoadUser()
+        private void SetURLWithEmail()
         {
-            UserCache.UpdateCache();
-            UserAccount foo = UserCache.Users.Find(x => x.Email.ToLower() == this.tbox_Username.Text.ToLower());
-            this.Session["isLoggedIn"] = "true";
-            this.Session["currentUser"] = foo;
-            this.Session.Timeout = 1440;
+            if (Request.QueryString["email"] != null)
+            {
+                this.tbox_Username.Text = Request.QueryString["email"];
+            }
         }
+        #endregion
     }
 }

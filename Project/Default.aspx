@@ -1,13 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Project.Default" %>
 
-<asp:content id="Content1" contentplaceholderid="head" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>Tweakers - Wij stellen technologie op de proef</title>
-</asp:content>
-<asp:content id="Content2" contentplaceholderid="ContentPlaceHolder" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <br />
-    
+
     <div class="row">
-        <img src="img/Vergelijker.PNG" style="width:100%; margin:auto;"/> 
+        <a href="pricewatch.aspx">
+            <img src="img/Vergelijker.PNG" style="width: 100%; margin: auto;" />
+        </a>
         <div class="col-4 column">
             <div class="highlight">
                 <asp:HyperLink ID="link_Highlight1" runat="server" NavigateUrl="#">
@@ -49,9 +51,8 @@
         <div class="col-9 column">
             <asp:Table runat="server" ID="table_News" CssClass="newstable">
             </asp:Table>
-         </div>
+        </div>
         <div class="col-3 column">
-
         </div>
     </div>
-</asp:content>
+</asp:Content>

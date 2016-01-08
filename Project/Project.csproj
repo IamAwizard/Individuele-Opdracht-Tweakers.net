@@ -71,12 +71,12 @@
     <Content Include="css\StyleSheet.css" />
     <Content Include="default.aspx" />
     <Content Include="img\Vergelijker.PNG" />
-    <Content Include="js\Script.js" />
     <Content Include="login.aspx" />
     <Content Include="logout.aspx" />
     <Content Include="nieuws.aspx" />
     <Content Include="packages.config" />
     <Content Include="Main.Master" />
+    <Content Include="Klassendiagram.cd" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -101,7 +101,8 @@
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="logic\UserCache.cs" />
+    <Compile Include="logic\DefaultManager.cs" />
+    <Compile Include="logic\LoginManager.cs" />
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -174,12 +175,7 @@
       <DependentUpon>reviews.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="nieuws\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

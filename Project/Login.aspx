@@ -39,7 +39,7 @@
                 </table>
                 <div id="submit">
                     <p>
-                        <asp:Label CssClass="errormessage hidden" ID="lbl_ErrorMessage" runat="server" Text="Testtext"></asp:Label>
+                        <asp:Label CssClass="errormessage" ID="lbl_ErrorMessage" runat="server" Text="Testtext" Visible="False"></asp:Label>
                     </p>
                     <asp:HyperLink ID="hlink_RecoverPassword" runat="server" NavigateUrl="#">Wachtwoord vergeten (to-do)</asp:HyperLink><br />
                     <asp:Button ID="btn_Login" runat="server" Text="Inloggen" OnClick="Btn_Login_Click" />

@@ -1,11 +1,9 @@
-﻿namespace Project
+﻿// <Summary>Additional page for handling Userrevies</Summary>
+// <Author>Jeroen Roovers</Author>
+namespace Project
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-    using System.Web.UI;
-    using System.Web.UI.WebControls;
 
     public partial class Productreview : System.Web.UI.Page
     {
@@ -18,7 +16,7 @@
             this.HideAllTheThings();
             if (!this.FetchFields())
             {
-                this.GetRidOfUser("");
+                this.GetRidOfUser(string.Empty);
             }
             else
             {
@@ -62,7 +60,7 @@
                 }
                 else
                 {
-                    this.GetRidOfUser("");
+                    this.GetRidOfUser(string.Empty);
                 }
             }
         }
@@ -85,13 +83,13 @@
 
         private void LoadReview()
         {
-            string qstring = "";
+            string qstring = string.Empty;
             if (Request.QueryString["review"] != null)
             {
                 qstring = Request.QueryString["review"].ToString();
             }
             List<UserReview> reviews = this.dbm.GetUserReviews(this.product.ID);
-            if (qstring != "")
+            if (qstring != string.Empty)
             {
                 int reviewid = 0;
                 bool isint = int.TryParse(qstring, out reviewid);
@@ -114,8 +112,8 @@
 
         private void LoadSingleReview(int reviewid)
         {
-            ur = this.dbm.GetUserReviewByID(reviewid);
-            if (ur != null)
+            this.ur = this.dbm.GetUserReviewByID(reviewid);
+            if (this.ur != null)
             {
                 this.CommentSection.Visible = true;
                 if (Session["isLoggedIn"].ToString() == "true")
@@ -150,7 +148,7 @@
                 }
 
                 List<UserReview> foolist = new List<UserReview>();
-                foolist.Add(ur);
+                foolist.Add(this.ur);
                 this.RepeaterSingleReview.DataSource = foolist;
                 this.RepeaterSingleReview.DataBind();
                 this.ReviewsSection.Visible = true;
@@ -182,7 +180,7 @@
             this.ProductSection.Visible = true;
         }
 
-        protected void btn_SubmitReview_Click(object sender, EventArgs e)
+        protected void Btn_SubmitReview_Click(object sender, EventArgs e)
         {
             if (this.CheckNessecaryFields())
             {
@@ -193,7 +191,7 @@
                 }
                 else
                 {
-                    foo = new UserReview(0, this.product.ID, this.user.ID, DateTime.Now, this.tbox_Summary.Text, tbox_Reviewcontent.Text, rbl_Rating.SelectedIndex + 1);
+                    foo = new UserReview(0, this.product.ID, this.user.ID, DateTime.Now, this.tbox_Summary.Text, this.tbox_Reviewcontent.Text, this.rbl_Rating.SelectedIndex + 1);
                 }
                 if (this.dbm.CheckUserReviewUnique(foo))
                 {
@@ -234,12 +232,12 @@
             this.AddCommentSection.Visible = false;
         }
 
-        protected void btn_SendComment_Click(object sender, EventArgs e)
+        protected void Btn_SendComment_Click(object sender, EventArgs e)
         {
             if(this.tbox_Comment.Text.Length > 2)
             {
 
-                this.dbm.AddComment(new Comment(DateTime.Now, this.user, CommentType.CommentOnUserReview, tbox_Comment.Text), ur.ID);
+                this.dbm.AddComment(new Comment(DateTime.Now, this.user, CommentType.CommentOnUserReview, this.tbox_Comment.Text), this.ur.ID);
                 Response.Redirect("productreview.aspx?review=" + this.ur.ID + "#reacties");
             }
         }

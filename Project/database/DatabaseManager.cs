@@ -6,9 +6,6 @@ namespace Project
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Linq;
-    using System.Web;
-    using Oracle.DataAccess;
     using Oracle.DataAccess.Client;
 
     public class DatabaseManager
@@ -343,7 +340,6 @@ namespace Project
                     returnlist.Add(toadd);
                 }
 
-
                 foreach (Product p in returnlist)
                 {
                     this.SimpleRead("select * from prijs p FULL OUTER JOIN winkel w ON p.winkelid = w.winkelid where productid = " + p.ID);
@@ -582,60 +578,36 @@ namespace Project
             }
         }
 
-        public List<UserAccount> GetUserCache()
+        public bool AuthenticateUser(string email, string password, out UserAccount user)
         {
-            try
-            {
-                this.Connect();
-                List<UserAccount> returnlist = new List<UserAccount>();
-
-                this.SimpleRead("SELECT USERACCOUNTID, ACCOUNTNAAM, LOWER(EMAIL), NAAM, FOTO, GEBOORTEDATUM FROM USERACCOUNT");
-                while (this.dr.Read())
-                {
-                    var id = this.SafeReadInt(this.dr, 0);
-                    var username = this.SafeReadString(this.dr, 1);
-                    var email = this.SafeReadString(this.dr, 2);
-                    var givenname = this.SafeReadString(this.dr, 3);
-                    var photo = this.SafeReadString(this.dr, 4);
-                    var dob = this.SafeReadDateTime(this.dr, 5);
-
-                    UserAccount foo = new UserAccount(id, username, email, givenname, photo, dob);
-                    returnlist.Add(foo);
-                }
-                return returnlist;
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-                return null;
-            }
-            finally
-            {
-                this.Disconnect();
-            }
-        }
-
-        public bool AuthenticateUser(string email, string password)
-        {
+            user = null;
+            bool value = false;
             try
             {
                 this.Connect();
 
-                this.cmd = new OracleCommand();
-                this.cmd.Connection = this.con;
-                this.cmd.CommandText = "SELECT * FROM USERACCOUNT WHERE LOWER(email) = LOWER(:newEMAIL) AND WACHTWOORD = :newPASSWORD";
+                this.SimpleReadWithParaMeters("SELECT USERACCOUNTID, ACCOUNTNAAM, LOWER(EMAIL), NAAM, FOTO, GEBOORTEDATUM FROM USERACCOUNT WHERE LOWER(email) = LOWER(:newEMAIL) AND WACHTWOORD = :newPASSWORD");
                 this.cmd.Parameters.Add("newEMAIL", email);
                 this.cmd.Parameters.Add("newPASSWORD", password);
-                this.cmd.CommandType = CommandType.Text;
                 this.dr = this.cmd.ExecuteReader();
+
                 if (this.dr.HasRows)
                 {
-                    return true;
+                    value = true;
                 }
-                else
+
+                while (this.dr.Read())
                 {
-                    return false;
+                    var userid = this.SafeReadInt(this.dr, 0);
+                    var username = this.SafeReadString(this.dr, 1);
+                    var useremail = this.SafeReadString(this.dr, 2);
+                    var usergivenname = this.SafeReadString(this.dr, 3);
+                    var userphoto = this.SafeReadString(this.dr, 4);
+                    var userdob = this.SafeReadDateTime(this.dr, 5);
+
+                    user = new UserAccount(userid, username, useremail, usergivenname, userphoto, userdob);
                 }
+                return value;
             }
             catch
             {
@@ -802,7 +774,7 @@ namespace Project
 
                 this.cmd = new OracleCommand();
                 this.cmd.Connection = this.con;
-                this.cmd.CommandText = string.Format("SELECT * FROM GEBRUIKERSREVIEW WHERE PRODUCTID = {0} AND AUTEUR = {1}", re.ProductID, re.AuthorID);
+                this.cmd.CommandText = $"SELECT * FROM GEBRUIKERSREVIEW WHERE PRODUCTID = {re.ProductID} AND AUTEUR = {re.AuthorID}";
                 this.cmd.CommandType = CommandType.Text;
 
                 this.dr = this.cmd.ExecuteReader();
@@ -831,11 +803,11 @@ namespace Project
                 List<UserReview> returnlist = new List<UserReview>();
                 this.cmd = new OracleCommand();
                 this.cmd.Connection = this.con;
-                this.cmd.CommandText = string.Format("select gr.gebruikersreviewid, gr.productid, ua.ACCOUNTNAAM, gr.datum, gr.samenvatting, count(r.reactieid), gr.BEOORDELING from gebruikersreview gr LEFT JOIN REACTIE R ON R.EXTERNID = gr.GEBRUIKERSREVIEWID  AND R.REACTIETYPEID = 3, USERACCOUNT ua WHERE gr.PRODUCTID = {0} AND gr.AUTEUR = ua.USERACCOUNTID GROUP BY gr.gebruikersreviewid, gr.productid, ua.ACCOUNTNAAM, gr.datum, gr.samenvatting, gr.BEOORDELING ORDER BY gr.GEBRUIKERSREVIEWID DESC", productid);
+                this.cmd.CommandText = $"select gr.gebruikersreviewid, gr.productid, ua.ACCOUNTNAAM, gr.datum, gr.samenvatting, count(r.reactieid), gr.BEOORDELING from gebruikersreview gr LEFT JOIN REACTIE R ON R.EXTERNID = gr.GEBRUIKERSREVIEWID  AND R.REACTIETYPEID = 3, USERACCOUNT ua WHERE gr.PRODUCTID = {productid} AND gr.AUTEUR = ua.USERACCOUNTID GROUP BY gr.gebruikersreviewid, gr.productid, ua.ACCOUNTNAAM, gr.datum, gr.samenvatting, gr.BEOORDELING ORDER BY gr.GEBRUIKERSREVIEWID DESC";
                 this.cmd.CommandType = CommandType.Text;
                 this.dr = this.cmd.ExecuteReader();
 
-                while (dr.Read())
+                while (this.dr.Read())
                 {
                     var reviewid = this.SafeReadInt(this.dr, 0);
                     var prodid = this.SafeReadInt(this.dr, 1);
@@ -868,7 +840,7 @@ namespace Project
                 UserReview foo = null;
 
                 this.cmd.Connection = this.con;
-                this.cmd.CommandText = string.Format("select gr.gebruikersreviewid, gr.productid, ua.ACCOUNTNAAM, gr.datum, gr.samenvatting, count(r.reactieid), gr.BEOORDELING from gebruikersreview gr LEFT JOIN REACTIE R ON R.EXTERNID = gr.GEBRUIKERSREVIEWID  AND R.REACTIETYPEID = 3, USERACCOUNT ua WHERE gr.GEBRUIKERSREVIEWID = {0} AND gr.AUTEUR = ua.USERACCOUNTID GROUP BY gr.gebruikersreviewid, gr.productid, ua.ACCOUNTNAAM, gr.datum, gr.samenvatting, gr.BEOORDELING ORDER BY gr.GEBRUIKERSREVIEWID DESC", id);
+                this.cmd.CommandText = $"select gr.gebruikersreviewid, gr.productid, ua.ACCOUNTNAAM, gr.datum, gr.samenvatting, count(r.reactieid), gr.BEOORDELING from gebruikersreview gr LEFT JOIN REACTIE R ON R.EXTERNID = gr.GEBRUIKERSREVIEWID  AND R.REACTIETYPEID = 3, USERACCOUNT ua WHERE gr.GEBRUIKERSREVIEWID = {id} AND gr.AUTEUR = ua.USERACCOUNTID GROUP BY gr.gebruikersreviewid, gr.productid, ua.ACCOUNTNAAM, gr.datum, gr.samenvatting, gr.BEOORDELING ORDER BY gr.GEBRUIKERSREVIEWID DESC";
                 this.cmd.CommandType = CommandType.Text;
                 this.dr = this.cmd.ExecuteReader();
                 while (this.dr.Read())
@@ -884,12 +856,13 @@ namespace Project
                 }
 
                 if (foo != null)
-
-                    this.SimpleRead(string.Format("SELECT CONTENT GEBRUIKERSREVIEW WHERE GEBRUIKERSREVIEWID = {0}", id));
-                while (this.dr.Read())
                 {
-                    var content = this.SafeReadString(this.dr, 0);
-                    foo.Content = content;
+                    this.SimpleRead("SELECT CONTENT GEBRUIKERSREVIEW WHERE GEBRUIKERSREVIEWID = " + id);
+                    while (this.dr.Read())
+                    {
+                        var content = this.SafeReadString(this.dr, 0);
+                        foo.Content = content;
+                    }
                 }
 
                 return foo;

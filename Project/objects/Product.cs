@@ -3,26 +3,14 @@
 
 namespace Project
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Web;
 
     public class Product
     {
         // Fields
 
         // Constructor
-        public Product(int id, string name)
-        {
-            this.ID = id;
-            this.DescriptionContent = string.Empty;
-            this.PhotoURL = string.Empty;
-            this.Name = name;
-            this.Categories = new List<string>();
-            this.Pricing = new List<Price>();
-        }
-
         public Product(int id, string name, string descriptioncontent, string photourl)
         {
             this.ID = id;
