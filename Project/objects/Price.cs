@@ -34,6 +34,7 @@ namespace Project
         public int ShopID { get; set; }
         public int ProductID { get; set; }
         public decimal Value { get; set; }
+        public Shop AssociatedShop { get; set; }
    
         // Methods
     }

@@ -22,7 +22,7 @@
                     <ul id="navbar">
                         <li><a href="nieuws.aspx">Nieuws</a></li>
                         <li><a href="reviews.aspx">Reviews</a></li>
-                        <li><a href="http://tweakers.net/pricewatch/">Pricewatch</a></li>
+                        <li><a href="pricewatch.aspx">Pricewatch</a></li>
                         <li class="floatright">
                             <asp:HyperLink ID="hlink_menubar_UserCurrent" NavigateUrl="#" runat="server">blabla@somemail.com</asp:HyperLink></li>
                         <li class="floatright">

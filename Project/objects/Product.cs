@@ -20,6 +20,7 @@ namespace Project
             this.PhotoURL = string.Empty;
             this.Name = name;
             this.Categories = new List<string>();
+            this.Pricing = new List<Price>();
         }
 
         public Product(int id, string name, string descriptioncontent, string photourl)
@@ -29,6 +30,7 @@ namespace Project
             this.DescriptionContent = descriptioncontent;
             this.PhotoURL = photourl;
             this.Categories = new List<string>();
+            this.Pricing = new List<Price>();
         }
 
         // Properties
@@ -36,7 +38,17 @@ namespace Project
         public string Name { get; private set; }
         public string PhotoURL { get;  set; }
         public string DescriptionContent { get; set; }
+        public List<Price> Pricing { get; set; }
         public List<string> Categories { get; set; }
+        public decimal LowestPrice { get
+            {
+                if (this.ShopAmount > 0)
+                    return this.Pricing.Min(x => x.Value);
+                else
+                    return 0;
+                
+            } }
+        public int ShopAmount { get { return this.Pricing.Count; } }
 
         // Methods
     }

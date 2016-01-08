@@ -1,4 +1,6 @@
-﻿namespace Project
+﻿// <Summary>Register Tab</Summary>
+// <Author>Jeroen Roovers</Author>
+namespace Project
 {
     using System;
     using System.Collections.Generic;

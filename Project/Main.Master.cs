@@ -38,7 +38,7 @@ namespace Project
                     this.hlink_menubar_Login.CssClass = "hidden";
                     this.hlink_menubar_Register.CssClass = "hidden";
                     this.hlink_menubar_UserCurrent.CssClass = string.Empty;
-                    this.hlink_menubar_UserCurrent.Text = (string)Session["userAccountName"];
+                    this.hlink_menubar_UserCurrent.Text = ((UserAccount)Session["currentUser"]).AccountName;
                     this.hlink_menubar_UserLogout.CssClass = string.Empty;
                 }
                 else

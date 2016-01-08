@@ -108,7 +108,7 @@ namespace Project
                 int authorid = 0;
                 bool authorok = int.TryParse(Session["userID"].ToString(), out authorid);
                 UserAccount author = new UserAccount(authorid, (string)Session["userAccountName"], (string)Session["userEmail"]);
-                Comment foo = new Comment(DateTime.Now, author, CommentType.CommentOnNews, tbox_Comment.Text);
+                Comment foo = new Comment(DateTime.Now, author, CommentType.CommentOnNews, this.tbox_Comment.Text);
                 int newsid = 0;
                 bool isint = int.TryParse(Request.QueryString["news"], out newsid);
                 if (isint)

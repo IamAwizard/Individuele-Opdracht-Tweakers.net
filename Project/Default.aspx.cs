@@ -88,6 +88,7 @@ namespace Project
                     {
                         this.img_Highlight1.ImageUrl = "http://placehold.it/300x150";
                     }
+                    this.img_Highlight1.PostBackUrl = navigateurl;
 
                     this.link_Highlight1Comments.Text = reviews[0].CommentCount.ToString() + " reacties";
                     this.link_Highlight1Comments.NavigateUrl = navigateurl + "#reacties";
@@ -105,6 +106,7 @@ namespace Project
                     {
                         this.img_Highlight2.ImageUrl = "http://placehold.it/300x150";
                     }
+                    this.img_Highlight2.PostBackUrl = navigateurl;
 
                     this.link_Highlight2Comments.Text = reviews[1].CommentCount.ToString() + " reacties";
                     this.link_Highlight2Comments.NavigateUrl = navigateurl + "#reacties";
@@ -122,6 +124,7 @@ namespace Project
                     {
                         this.img_Highlight3.ImageUrl = "http://placehold.it/300x150";
                     }
+                    this.img_Highlight3.PostBackUrl = navigateurl;
 
                     this.link_Highlight3Comments.Text = reviews[2].CommentCount.ToString() + " reacties";
                     this.link_Highlight3Comments.NavigateUrl = navigateurl + "#reacties";

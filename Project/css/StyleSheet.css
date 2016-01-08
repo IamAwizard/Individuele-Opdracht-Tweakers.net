@@ -9,6 +9,10 @@
     font-size: 12px;
 }
 
+.text-center{
+    text-align: center;
+}
+
 #form_Content {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -352,7 +356,6 @@ a {
 
     #about a {
         color: #DBDCDC;
-        ;
     }
 
         #about a:hover {
@@ -591,7 +594,7 @@ textarea {
     font-size: 12px;
     font-family: arial,helvetica,"Liberation Sans",sans-serif;
     padding: 2px 3px;
-    min-height: 234px;
+    min-height: 60px;
     min-width: 234px;
     border: 1px solid #DDDEDE;
     margin-bottom: 5px;
@@ -696,4 +699,133 @@ textarea {
         display: block;
         color: #000;
         font-weight: 700;
+    }
+
+.searchbar {
+    height: 27px;
+    line-height: 27px;
+    width: 100%;
+    margin: 0px auto;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+    .searchbar input {
+        display: inline-block;
+    }
+
+        .searchbar input.text {
+            height: 30px;
+            width: 320px;
+            border: 1px solid #C3C6C6;
+            border-radius: 2px;
+            box-sizing: border-box;
+            background-color: #FFF;
+            font-size: 14px;
+            padding: 0px 5px;
+        }
+
+        .searchbar input.acceptbutton {
+            padding-top: 2px;
+            height: 30px;
+        }
+
+table.productlist {
+    border-top: 1px solid #E8EAEA;
+    table-layout: fixed;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+.productlist p {
+    line-height: 21px;
+    margin: 0px 0px 6px;
+    color: #828585;
+}
+
+.productlist a {
+    line-height: 21px;
+    margin: 0px 0px 6px;
+}
+
+    .productlist a.producttitle {
+        font-size: 16px;
+        padding: 20px 0px;
+        display: block;
+    }
+
+    .productlist a.priceshops {
+        display: block;
+        padding: 2px 0px 0px 20px;
+    }
+
+.productlist td {
+    padding: 10px 10px 0px;
+    vertical-align: top;
+    border-bottom: 1px solid #E8EAEA;
+}
+
+img.productthumbnail {
+    width: 84px;
+    height: 67px;
+}
+
+.prothumbcell {
+    width: 90px;
+}
+
+.protitlecell {
+    width: 700px;
+}
+
+.ProductSummary .col-3{
+    text-align:center;
+
+}
+
+.productprices {
+    margin-bottom: 14px;
+    width: 100%;
+    table-layout: fixed;
+}
+
+    .productprices td {
+        line-height: 15px;
+        border-bottom: 1px solid #E8EAEA;
+        padding: 7px 0px;
+        font-size: 13px;
+    }
+
+    .productprices .ShopName {
+        font-size: 14px;
+    }
+
+    .productprices .ShopLink {
+        width: 80px;
+    }
+
+    .productprices .ShopPrice {
+        width: 120px;
+    }
+
+        .productprices .ShopPrice a {
+            padding: 2px 15px;
+            border-radius: 4px;
+        }
+
+p.productstuff {
+    padding: 20px;
+    line-height: 7;
+    font-size: 15px;
+    color:#313232;
+}
+
+    p.productstuff i {
+        display: block;
+        width: 200px;
+        display: inline-block;
+        width: 100px;
+        color: #000;
+        
     }

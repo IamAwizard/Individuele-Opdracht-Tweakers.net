@@ -1,4 +1,6 @@
-﻿namespace Project
+﻿// <Summary>reviews Tab</Summary>
+// <Author>Jeroen Roovers</Author>
+namespace Project
 {
     using System;
     using System.Collections.Generic;
@@ -152,7 +154,7 @@
                 int authorid = 0;
                 bool authorok = int.TryParse(Session["userID"].ToString(), out authorid);
                 UserAccount author = new UserAccount(authorid, (string)Session["userAccountName"], (string)Session["userEmail"]);
-                Comment foo = new Comment(DateTime.Now, author, CommentType.CommentOnReview, tbox_Comment.Text);
+                Comment foo = new Comment(DateTime.Now, author, CommentType.CommentOnReview, this.tbox_Comment.Text);
                 int pageid = 0;
                 bool pageisint = int.TryParse(Request.QueryString["page"], out pageid);
                 int reviewid = 0;

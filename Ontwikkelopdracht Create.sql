@@ -399,11 +399,11 @@ INSERT INTO REVIEWPAGINA (REVIEWID, PAGINANR, SUBTITEL, CONTENT) VALUES (3, 3, '
 INSERT INTO REVIEW_CATEGORIE (REVIEWID, CATEGORIEID) VALUES (1, 1);
 INSERT INTO REVIEW_CATEGORIE (REVIEWID, CATEGORIEID) VALUES (1, 10);
 
-INSERT INTO PRODUCT (NAAM, CONTENT) VALUES ('In Win 805 Zwart', 'Type: Tower, Formaat: ATX, Panel: Aluminium en glas');
-INSERT INTO PRODUCT (NAAM, CONTENT) VALUES ('Samsung UE48JU6000W Zwart', 'Schermdiagonaal 48", Geoptimaliseerde refresh rate	800Hz');
-INSERT INTO PRODUCT (NAAM, CONTENT) VALUES ('Apple iPhone 6 16GB Grijs', 'Telefoon van Apple');
-INSERT INTO PRODUCT (NAAM, CONTENT) VALUES ('Fallout 4, PC (Windows)', 'Releasedatum 11 november 2015');
-INSERT INTO PRODUCT (NAAM, CONTENT) VALUES ('Asus STRIX-GTX980TI-DC3OC-6GD5-GAMING', 'Chipset generatie	GeForce 900 Serie Videochipfabrikant Nvidia Geheugengrootte	6GB');
+INSERT INTO PRODUCT (NAAM, FOTO, CONTENT) VALUES ('In Win 805 Zwart', 'http://ic.tweakimg.net/ext/i/thumblarge/2000655225.jpeg', 'Type: Tower, Formaat: ATX, Panel: Aluminium en glas');
+INSERT INTO PRODUCT (NAAM, FOTO, CONTENT) VALUES ('Samsung UE48JU6000W Zwart', 'http://ic.tweakimg.net/ext/i/thumblarge/2000645068.jpeg', 'Schermdiagonaal 48", Geoptimaliseerde refresh rate 600Hz');
+INSERT INTO PRODUCT (NAAM, FOTO, CONTENT) VALUES ('Apple iPhone 6 16GB Grijs', 'http://ic.tweakimg.net/ext/i/thumblarge/2000544428.png', '4,7" display, 4G-support, geen geheugenslot');
+INSERT INTO PRODUCT (NAAM, FOTO, CONTENT) VALUES ('Fallout 4, PC (Windows)', 'http://ic.tweakimg.net/ext/i/thumblarge/2000620185.png' ,'RPG game voor Windows, Releasedatum 11 november 2015');
+INSERT INTO PRODUCT (NAAM, FOTO, CONTENT) VALUES ('Asus STRIX-GTX980TI-DC3OC-6GD5-GAMING', 'http://ic.tweakimg.net/ext/i/thumblarge/2000630451.jpeg', 'Chipset generatie: GeForce 900-Serie Videochipfabrikant: Nvidia Geheugengrootte: 6GB');
 
 INSERT INTO PRODUCT_REVIEW (PRODUCTID, REVIEWID) VALUES (1, 1);
 

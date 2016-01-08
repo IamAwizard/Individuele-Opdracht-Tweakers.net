@@ -85,6 +85,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="pricewatch.aspx" />
+    <Content Include="productreview.aspx" />
     <Content Include="register.aspx" />
     <Content Include="reviews.aspx" />
     <Content Include="Web.config">
@@ -135,6 +137,20 @@
     <Compile Include="objects\News.cs" />
     <Compile Include="objects\Price.cs" />
     <Compile Include="objects\Product.cs" />
+    <Compile Include="pricewatch.aspx.cs">
+      <DependentUpon>pricewatch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="pricewatch.aspx.designer.cs">
+      <DependentUpon>pricewatch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="productreview.aspx.cs">
+      <DependentUpon>productreview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="productreview.aspx.designer.cs">
+      <DependentUpon>productreview.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>

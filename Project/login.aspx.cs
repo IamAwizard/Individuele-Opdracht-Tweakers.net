@@ -1,4 +1,6 @@
-﻿namespace Project
+﻿// <Summary>login Tab</Summary>
+// <Author>Jeroen Roovers</Author>
+namespace Project
 {
     using System;
     using System.Collections.Generic;
@@ -77,10 +79,8 @@
             UserCache.UpdateCache();
             UserAccount foo = UserCache.Users.Find(x => x.Email.ToLower() == this.tbox_Username.Text.ToLower());
             this.Session["isLoggedIn"] = "true";
-            this.Session["userID"] = foo.ID;
-            this.Session["userEmail"] = foo.Email;
-            this.Session["userAccountName"] = foo.AccountName;
-            this.Session["userGivenMame"] = foo.GivenName;
+            this.Session["currentUser"] = foo;
+            this.Session.Timeout = 1440;
         }
     }
 }

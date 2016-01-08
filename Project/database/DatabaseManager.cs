@@ -283,6 +283,120 @@ namespace Project
             }
         }
 
+        public List<Product> GetProductsByName(string searchstring)
+        {
+            try
+            {
+                this.Connect();
+                List<Product> returnlist = new List<Product>();
+
+                searchstring = searchstring.Insert(0, "%");
+                searchstring += "%";
+                this.SimpleReadWithParaMeters("SELECT * FROM PRODUCT WHERE UPPER(NAAM) LIKE UPPER(:productNAAM) ");
+                this.cmd.Parameters.Add("productNAAM", searchstring);
+                this.dr = this.cmd.ExecuteReader();
+
+                while (this.dr.Read())
+                {
+                    var id = this.SafeReadInt(this.dr, 0);
+                    var name = this.SafeReadString(this.dr, 1);
+                    var photo = this.SafeReadString(this.dr, 2);
+                    var content = this.SafeReadString(this.dr, 3);
+
+                    Product toadd = new Product(id, name, content, photo);
+                    returnlist.Add(toadd);
+                }
+
+
+                foreach (Product p in returnlist)
+                {
+                    this.SimpleRead("select * from prijs p FULL OUTER JOIN winkel w ON p.winkelid = w.winkelid where productid = " + p.ID);
+                    while (this.dr.Read())
+                    {
+                        var priceid = this.SafeReadInt(this.dr, 0);
+                        var productid = this.SafeReadInt(this.dr, 1);
+                        var shopid = this.SafeReadInt(this.dr, 2);
+                        var price = this.SafeReadDecimal(this.dr, 3);
+                        var shop = this.SafeReadInt(this.dr, 4);
+                        var shopname = this.SafeReadString(this.dr, 5);
+                        var shopsite = this.SafeReadString(this.dr, 6);
+                        var shopcontent = this.SafeReadString(this.dr, 7);
+                        var shopphoto = this.SafeReadString(this.dr, 8);
+
+                        Price toadd = new Price(priceid, shopid, productid, price);
+                        toadd.AssociatedShop = new Shop(shop, shopname, shopsite, shopcontent, shopphoto);
+                        p.Pricing.Add(toadd);
+                    }
+
+                }
+
+                return returnlist;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                this.Disconnect();
+            }
+        }
+
+        public Product GetProductByID(int productid)
+        {
+            try
+            {
+                this.Connect();
+                Product returnvalue = null;
+
+                this.SimpleReadWithParaMeters("SELECT * FROM PRODUCT WHERE PRODUCTID = :productID ");
+                this.cmd.Parameters.Add("productID", productid);
+                this.dr = this.cmd.ExecuteReader();
+
+                while (this.dr.Read())
+                {
+                    var id = this.SafeReadInt(this.dr, 0);
+                    var name = this.SafeReadString(this.dr, 1);
+                    var photo = this.SafeReadString(this.dr, 2);
+                    var content = this.SafeReadString(this.dr, 3);
+
+                    returnvalue = new Product(id, name, content, photo);
+                }
+
+                this.SimpleReadWithParaMeters("select * from prijs p FULL OUTER JOIN winkel w ON p.winkelid = w.winkelid where productid = :productID ");
+                this.cmd.Parameters.Add("productID", productid);
+                this.dr = this.cmd.ExecuteReader();
+
+                while (this.dr.Read())
+                {
+                    var priceid = this.SafeReadInt(this.dr, 0);
+                    var prodid = this.SafeReadInt(this.dr, 1);
+                    var shopid = this.SafeReadInt(this.dr, 2);
+                    var price = this.SafeReadDecimal(this.dr, 3);
+                    var shop = this.SafeReadInt(this.dr, 4);
+                    var shopname = this.SafeReadString(this.dr, 5);
+                    var shopsite = this.SafeReadString(this.dr, 6);
+                    var shopcontent = this.SafeReadString(this.dr, 7);
+                    var shopphoto = this.SafeReadString(this.dr, 8);
+
+                    Price toadd = new Price(priceid, shopid, prodid, price);
+                    toadd.AssociatedShop = new Shop(shop, shopname, shopsite, shopcontent, shopphoto);
+                    returnvalue.Pricing.Add(toadd);
+                }
+                return returnvalue;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                this.Disconnect();
+            }
+        }
+
         public List<News> GetLatestNews()
         {
             try
@@ -601,6 +715,35 @@ namespace Project
                 this.cmd.Parameters.Add("newREACTIETYPEID", (int)newcomment.Type);
                 this.cmd.Parameters.Add("newDATUM", newcomment.Date);
                 this.cmd.Parameters.Add("newCONTENT", newcomment.Content);
+                this.cmd.CommandType = CommandType.Text;
+
+                this.cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                this.Disconnect();
+            }
+        }
+
+        public void AddUserReview(UserReview newreview)
+        {
+            try
+            {
+                this.Connect();
+
+                this.cmd = new OracleCommand();
+                this.cmd.Connection = this.con;
+                this.cmd.CommandText = "INSERT INTO GEBRUIKERSREVIEW (ProductID, Auteur, Datum, Samenvatting, Content, Beoordeling) VALUES (:newProdID, :newAuteur, :newDate, :newSummary, :newContent, :newRating)";
+                this.cmd.Parameters.Add("newProdID", newreview.ProductID);
+                this.cmd.Parameters.Add("newAuteur", newreview.AuthorID);
+                this.cmd.Parameters.Add("newDate", newreview.Date);
+                this.cmd.Parameters.Add("newSummary", newreview.Summary);
+                this.cmd.Parameters.Add("newContent", newreview.Content);
+                this.cmd.Parameters.Add("newRating", newreview.Rating);
                 this.cmd.CommandType = CommandType.Text;
 
                 this.cmd.ExecuteNonQuery();
