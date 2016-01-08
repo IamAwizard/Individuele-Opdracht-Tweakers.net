@@ -9,7 +9,7 @@
     font-size: 12px;
 }
 
-.text-center{
+.text-center {
     text-align: center;
 }
 
@@ -394,7 +394,7 @@ table.newstable {
     }
 
     table.newstable .timeplaced {
-        width: 36px;
+        width: 80px;
         text-align: center;
         color: #828585;
     }
@@ -779,9 +779,8 @@ img.productthumbnail {
     width: 700px;
 }
 
-.ProductSummary .col-3{
-    text-align:center;
-
+.ProductSummary .col-3 {
+    text-align: center;
 }
 
 .productprices {
@@ -818,7 +817,7 @@ p.productstuff {
     padding: 20px;
     line-height: 7;
     font-size: 15px;
-    color:#313232;
+    color: #313232;
 }
 
     p.productstuff i {
@@ -827,5 +826,11 @@ p.productstuff {
         display: inline-block;
         width: 100px;
         color: #000;
-        
     }
+
+.userreview {
+    border: 1px solid #DDDEDE;
+    padding: 10px 15px 8px;
+    margin-bottom: 10px;
+    position: relative;
+}

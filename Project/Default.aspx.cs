@@ -41,7 +41,7 @@ namespace Project
                     category.CssClass = "category";
 
                     TableCell time = new TableCell();
-                    time.Text = n.Date.ToShortTimeString();
+                    time.Text = n.Date.ToString("dd MMM") + " - " + n.Date.ToShortTimeString();
                     time.CssClass = "timeplaced";
 
                     TableCell headline = new TableCell();

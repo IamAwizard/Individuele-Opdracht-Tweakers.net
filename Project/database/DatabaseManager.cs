@@ -283,6 +283,42 @@ namespace Project
             }
         }
 
+        public List<Comment> GetCommentsOnNewsByUserReviewID(int userreviewid)
+        {
+            try
+            {
+                this.Connect();
+                List<Comment> foo = new List<Comment>();
+
+                this.SimpleReadWithParaMeters("SELECT R.REACTIEID, U.USERACCOUNTID, U.ACCOUNTNAAM, U.EMAIL, R.DATUM, CONTENT FROM REACTIE R, USERACCOUNT U WHERE EXTERNID = :someID AND REACTIETYPEID = 3 AND R.AUTEUR = U.USERACCOUNTID");
+                this.cmd.Parameters.Add("someID", userreviewid);
+                this.dr = this.cmd.ExecuteReader();
+                while (this.dr.Read())
+                {
+                    var commentid = this.SafeReadInt(this.dr, 0);
+                    var authorid = this.SafeReadInt(this.dr, 1);
+                    var authorname = this.SafeReadString(this.dr, 2);
+                    var authoremail = this.SafeReadString(this.dr, 3);
+                    var commentdate = this.SafeReadDateTime(this.dr, 4);
+                    var commentcontent = this.SafeReadString(this.dr, 5);
+
+                    UserAccount author = new UserAccount(authorid, authorname, authoremail);
+                    Comment toadd = new Comment(commentid, commentdate, author, CommentType.CommentOnNews, commentcontent);
+                    foo.Add(toadd);
+                }
+                return foo;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                this.Disconnect();
+            }
+        }
+
         public List<Product> GetProductsByName(string searchstring)
         {
             try
@@ -751,6 +787,117 @@ namespace Project
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                this.Disconnect();
+            }
+        }
+
+        public bool CheckUserReviewUnique(UserReview re)
+        {
+            try
+            {
+                this.Connect();
+
+                this.cmd = new OracleCommand();
+                this.cmd.Connection = this.con;
+                this.cmd.CommandText = string.Format("SELECT * FROM GEBRUIKERSREVIEW WHERE PRODUCTID = {0} AND AUTEUR = {1}", re.ProductID, re.AuthorID);
+                this.cmd.CommandType = CommandType.Text;
+
+                this.dr = this.cmd.ExecuteReader();
+                if (this.dr.HasRows)
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                this.Disconnect();
+            }
+        }
+
+        public List<UserReview> GetUserReviews(int productid)
+        {
+            try
+            {
+                this.Connect();
+                List<UserReview> returnlist = new List<UserReview>();
+                this.cmd = new OracleCommand();
+                this.cmd.Connection = this.con;
+                this.cmd.CommandText = string.Format("select gr.gebruikersreviewid, gr.productid, ua.ACCOUNTNAAM, gr.datum, gr.samenvatting, count(r.reactieid), gr.BEOORDELING from gebruikersreview gr LEFT JOIN REACTIE R ON R.EXTERNID = gr.GEBRUIKERSREVIEWID  AND R.REACTIETYPEID = 3, USERACCOUNT ua WHERE gr.PRODUCTID = {0} AND gr.AUTEUR = ua.USERACCOUNTID GROUP BY gr.gebruikersreviewid, gr.productid, ua.ACCOUNTNAAM, gr.datum, gr.samenvatting, gr.BEOORDELING ORDER BY gr.GEBRUIKERSREVIEWID DESC", productid);
+                this.cmd.CommandType = CommandType.Text;
+                this.dr = this.cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    var reviewid = this.SafeReadInt(this.dr, 0);
+                    var prodid = this.SafeReadInt(this.dr, 1);
+                    var username = this.SafeReadString(this.dr, 2);
+                    var date = this.SafeReadDateTime(this.dr, 3);
+                    var summary = this.SafeReadString(this.dr, 4);
+                    var commentcount = (int)this.SafeReadDecimal(this.dr, 5);
+                    var rating = this.SafeReadInt(this.dr, 6);
+                    UserReview review = new UserReview(reviewid, prodid, username, date, summary, commentcount, rating);
+                    returnlist.Add(review);
+                }
+                return returnlist;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                this.Disconnect();
+            }
+        }
+
+        public UserReview GetUserReviewByID(int id)
+        {
+            try
+            {
+                this.Connect();
+                UserReview foo = null;
+
+                this.cmd.Connection = this.con;
+                this.cmd.CommandText = string.Format("select gr.gebruikersreviewid, gr.productid, ua.ACCOUNTNAAM, gr.datum, gr.samenvatting, count(r.reactieid), gr.BEOORDELING from gebruikersreview gr LEFT JOIN REACTIE R ON R.EXTERNID = gr.GEBRUIKERSREVIEWID  AND R.REACTIETYPEID = 3, USERACCOUNT ua WHERE gr.GEBRUIKERSREVIEWID = {0} AND gr.AUTEUR = ua.USERACCOUNTID GROUP BY gr.gebruikersreviewid, gr.productid, ua.ACCOUNTNAAM, gr.datum, gr.samenvatting, gr.BEOORDELING ORDER BY gr.GEBRUIKERSREVIEWID DESC", id);
+                this.cmd.CommandType = CommandType.Text;
+                this.dr = this.cmd.ExecuteReader();
+                while (this.dr.Read())
+                {
+                    var reviewid = this.SafeReadInt(this.dr, 0);
+                    var prodid = this.SafeReadInt(this.dr, 1);
+                    var username = this.SafeReadString(this.dr, 2);
+                    var date = this.SafeReadDateTime(this.dr, 3);
+                    var summary = this.SafeReadString(this.dr, 4);
+                    var commentcount = (int)this.SafeReadDecimal(this.dr, 5);
+                    var rating = this.SafeReadInt(this.dr, 6);
+                    foo = new UserReview(reviewid, prodid, username, date, summary, commentcount, rating);
+                }
+
+                if (foo != null)
+
+                    this.SimpleRead(string.Format("SELECT CONTENT GEBRUIKERSREVIEW WHERE GEBRUIKERSREVIEWID = {0}", id));
+                while (this.dr.Read())
+                {
+                    var content = this.SafeReadString(this.dr, 0);
+                    foo.Content = content;
+                }
+
+                return foo;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
             }
             finally
             {

@@ -103,15 +103,6 @@ namespace Project {
         protected global::System.Web.UI.WebControls.TextBox tbox_Reviewcontent;
         
         /// <summary>
-        /// btn_SubmitReview control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_SubmitReview;
-        
-        /// <summary>
         /// lbl_errormessage control.
         /// </summary>
         /// <remarks>
@@ -121,6 +112,15 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_errormessage;
         
         /// <summary>
+        /// btn_SubmitReview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_SubmitReview;
+        
+        /// <summary>
         /// ReviewsSection control.
         /// </summary>
         /// <remarks>
@@ -128,6 +128,33 @@ namespace Project {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ReviewsSection;
+        
+        /// <summary>
+        /// reviewtitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reviewtitle;
+        
+        /// <summary>
+        /// RepeaterReview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RepeaterReview;
+        
+        /// <summary>
+        /// RepeaterSingleReview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater RepeaterSingleReview;
         
         /// <summary>
         /// CommentSection control.

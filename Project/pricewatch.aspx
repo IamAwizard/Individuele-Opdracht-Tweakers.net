@@ -5,6 +5,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
     <div class="row">
+        <h2>
+            Pricewatch
+        </h2>
         <div id="SearchbarSection" class=" searchbar col-12 column " runat="server">
             <asp:TextBox ID="tbox_Search" CssClass="text" placeholder="Zoek een product" runat="server"></asp:TextBox><asp:Button ID="btn_Search" runat="server" Text="Zoeken" CssClass="acceptbutton" OnClick="Btn_Search_Click" />
         </div>
@@ -15,7 +18,7 @@
         <div id="ProductSection" class="productdetails col-12 column " runat="server">
             <div class="ProductSummary">
                 <div class=" col-3 column">
-                    <h2 class =" text-center">
+                    <h2 class=" text-center">
                         <asp:Label ID="lbl_ProductName" runat="server" Text="IN WIN 05 ZWART"></asp:Label>
 
                     </h2>
@@ -31,9 +34,9 @@
                 <div class=" col-9 column">
                     <p class="productstuff">
                         <i>Prijs:</i>
-                    <asp:Label ID="lbl_ProductMinPrice" runat="server" Text="Label"></asp:Label><br />
+                        <asp:Label ID="lbl_ProductMinPrice" runat="server" Text="Label"></asp:Label><br />
                         <i>Specificaties:</i>
-                    <asp:Label ID="lbl_ProductSpecs" runat="server" Text="Label"></asp:Label>
+                        <asp:Label ID="lbl_ProductSpecs" runat="server" Text="Label"></asp:Label>
                     </p>
                     <hr />
                     <asp:Table ID="table_ProductPrices" CssClass="productprices" runat="server"></asp:Table>

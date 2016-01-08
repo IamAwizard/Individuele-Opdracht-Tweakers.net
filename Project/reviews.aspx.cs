@@ -36,18 +36,18 @@ namespace Project
 
                 int id = 0;
                 bool isint = int.TryParse(reviewid, out id);
-                if (isint) // Continue if given review ID is an integer
+                if (isint) //// Continue if given review ID is an integer
                 {
                     int pageid = 0;
                     bool pageisint = int.TryParse(Request.QueryString["page"].ToString(), out pageid);
-                    if (pageisint) // Continue if given page ID is an integer
+                    if (pageisint) //// Continue if given page ID is an integer
                     {
 
                         List<Comment> comments = this.dbm.GetCommentsOnReviewByReviewID(id);
-                        if (comments != null) // null comments - SHOULDN'T trigger, but just in case
+                        if (comments != null) //// null comments - SHOULDN'T trigger, but just in case
                         {
                             this.comments.InnerHtml = @"<h2 id=""reacties"">Reacties<small>(" + comments.Count + ")</small></h2>";
-                            if (comments.Count > 0) // If there are comments, start drawing them
+                            if (comments.Count > 0) //// If there are comments, start drawing them
                             {
                                 foreach (Comment c in comments)
                                 {
@@ -63,23 +63,23 @@ namespace Project
                                     }
                                 }
                             }
-                            else //  There are no comments for this review. Show message instead.
+                            else ////  There are no comments for this review. Show message instead.
                             {
                                 this.comments.InnerHtml += @"<div class = ""geenreacties""><p>Er zijn nog geen reacties geplaatst!</p></div>";
                             }
                         }
 
                         Review r = this.dbm.GetReviewByID(id);
-                        if (r == null) // No such Review with given ID
+                        if (r == null) //// No such Review with given ID
                         {
                             this.ReviewsArea.InnerHtml = NotFound404.GetInnerHtmlFor404("Het opgegeven ID " + id + " is niet geldig!");
                             this.comments.Style.Add("display", "none");
                             this.addcomment.Style.Add("display", "none");
                             return;
                         }
-                        else // Draw page
+                        else //// Draw page
                         {
-                            if (pageid > 0 && pageid <= r.Pages.Count) // Check is review contains this page
+                            if (pageid > 0 && pageid <= r.Pages.Count) //// Check is review contains this page
                             {
                                 this.ReviewsArea.InnerHtml = @"<div class=""newsarea""><div class=""row""><div class=""col-12 column""><a class=""titleLink"" href=""reviews.aspx?review=" + (int)r.ID + "\"><h1>" + r.Title + " - " + r.SubTitle + "</h1></a></div></div><div class=\"row\"><div class=\"col-9 column\"><p class=\"smalldate\">" + r.Date.ToLongDateString() + " " + r.Date.ToShortTimeString() + ", <a class=\"titleLink\" href=\"reviews.aspx?review=" + (int)r.ID + "&page=" + pageid + "#reacties\">" + comments.Count + " reacties</a></p>";
                                 this.ReviewsArea.InnerHtml += @"<div class=""article""><h2>" + r.Pages[pageid - 1].PageTitle + "</h2>" + r.Pages[pageid - 1].Content;
@@ -102,23 +102,23 @@ namespace Project
                                 this.ReviewsArea.InnerHtml += "</ul></div></div></div></div>";
 
                             }
-                            else // Page out of range of review
+                            else //// Page out of range of review
                             {
                                 this.DisplayErrorMessage("Het opgegeven pagina-ID " + pageid + " is buiten het paginabereik van deze review!");
                             }
                         }
                     }
-                    else // Page ID is not an integer
+                    else //// Page ID is not an integer
                     {
                         this.DisplayErrorMessage("Het opgegeven pagina-ID " + qstring + " is niet geldig!");
                     }
                 }
-                else // Review ID is not an integer
+                else //// Review ID is not an integer
                 {
                     this.DisplayErrorMessage("Het opgegeven ID " + reviewid + " is niet geldig!");
                 }
             }
-            else // Page ID is null - Send to page 1
+            else //// Page ID is null - Send to page 1
             {
                 Response.Redirect("reviews.aspx?review=" + reviewid + "&page=1");
             }
